@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 	<title>MomoWars</title>
 
 	<!-- Angular JS -->
@@ -38,7 +38,7 @@
 
 	<script src="js/common/constants.js"></script>
 	<script src="js/common/base.js"></script>
-	
+
 	<script src="js/ui/dialog-message.js"></script>
 	<script src="js/ui/ui.js"></script>
 
@@ -51,11 +51,17 @@
 
 <body ng-controller="controllerGame">
 
-	<div ng-show="!loading">
+	<div class="row" ng-show="!loading">
+		<div class="col-md-3" style="background-color:red">
+			
+		</div>
 
-		<div ng-include="'html/dialog-message.html'"></div>
+		<div class="col-md-9" style="background-color:green">
 
+		</div>
 	</div>
+
+	<div ng-include="'html/dialog-message.html'"></div>
 
 </body>
 
