@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="gameApp">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+	<title>MomoWars</title>
+
+	<!-- Angular JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+	<!-- FontAwesome -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<!-- Popper -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js"></script>
+
+	<!-- Bootstrap -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+	<!-- Local styles -->
+	<link href="styles/base.css" rel="stylesheet">
+	<link href="styles/game.css" rel="stylesheet">
+
+	<!-- Local scripts -->
+	<script src="js/models/game.js"></script>
+
+	<script src="js/common/constants.js"></script>
+	<script src="js/common/base.js"></script>
+	
+	<script src="js/ui/dialog-message.js"></script>
+	<script src="js/ui/ui.js"></script>
+
+	<script src="js/database/database.js"></script>
+	<script src="js/database/database-game.js"></script>
+
+	<script src="js/activities/game.js"></script>
+
+</head>
+
+<body ng-controller="controllerGame">
+
+	<div ng-show="!loading">
+
+		<div ng-include="'html/dialog-message.html'"></div>
+
+	</div>
+
+</body>
+
+</html>

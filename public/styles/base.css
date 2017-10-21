@@ -1,0 +1,230 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-size: 14px;
+	color: #555555;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #FAFAFA;
+}
+
+.fa
+{
+	padding-right: 0.5em;
+}
+
+.form-control
+{
+	font-size: 1.1em;
+}
+
+.btn:hover
+{
+	cursor: pointer;
+}
+
+.btn-primary
+{
+	background: #3D88EC;
+	border-color: #3D88EC;
+}
+
+.btn-primary:hover
+{
+	background: #4493FA;
+	border-color: #4493FA;
+}
+
+.btn-success
+{
+	background: #5F9B48;
+	border-color: #5F9B48;
+}
+
+.btn-success:hover
+{
+	background: #6AAD4F;
+	border-color: #6AAD4F;
+}
+
+.btn-danger
+{
+	background: #EA5854;
+	border-color: #EA5854;
+}
+
+.btn-danger:hover
+{
+	background: #F86060;
+	border-color: #F86060;
+}
+
+.cursor-hand
+{
+	cursor: pointer;
+}
+
+.view-invisible
+{
+	visibility: hidden;
+}
+
+.view-visible
+{
+	visibility: visible;
+}
+
+.loading-progress
+{
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	width: 20%;
+}
+
+.empty-label
+{
+	margin-top: 20em;
+	color: #AAAAAA;
+	font-size: 1.5em;
+}
+
+.button-action
+{
+	cursor: pointer;
+	width: 2.3em;
+	border: 0 solid transparent;
+}
+
+.button-circle
+{
+	width: 4em;
+	height: 4em;
+	padding: 0px 1.3em;
+	border-radius: 10em;
+	position: fixed;
+	z-index: 999;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button-action-icon
+{
+	color: #888888;
+}
+
+.separator
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.error-message-container
+{
+	width: 100%;
+    text-align: center;
+    position: fixed;
+    z-index: 999999;
+    bottom: 30px;
+}
+
+.error-message-text
+{
+	visibility: visible;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    padding: 16px;
+    font-size: 17px;
+}
+
+/* Loading progress bar */
+
+.progress-bar.indeterminate
+{
+	position: relative;
+	animation: progress-indeterminate 1s linear infinite;
+}
+  
+@keyframes progress-indeterminate
+{
+	from { left: -25%; width: 25%; }
+	to   { left: 100%; width: 25%; }
+}
+
+/* Navigation tabs */
+
+.navigation-bar-top
+{
+	justify-content: center;
+	border: none;
+	color: #FAFAFA;
+	background-color: #6E99C4;
+}
+
+.navigation-bar-top > li
+{
+	cursor: pointer;
+	padding: 0.5em 1em 0.5em 1em;
+}
+
+.navigation-bar-top > li:hover
+{
+	border-bottom: 0.2em solid #FAFAFA;
+	color: #FAFAFA;
+}
+
+.navigation-bar-top > li.active
+{
+	border-bottom: 0.2em solid #FFFFFF;
+	color: #FFFFFF;
+}
+
+/* Modal */
+
+.no-modal-separator
+{
+	border: 0 solid transparent;
+}
+
+/* Table */
+
+.thead-default th
+{
+    color: #444444;
+	background-color: #F2F5F7;
+	height: 2.7em;
+}
+
+.table thead th
+{
+	vertical-align: middle;
+	border-top: 1px solid #E0E0E0;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.table td
+{
+	border-bottom: 1px solid #E9ECEF;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th
+{
+	background-color:white;
+}
+
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th
+{
+	background-color: #F9F9F9;
+}
+
+/* General */
+
+.noselect
+{
+    -webkit-user-select: none; /* Safari, iOS, and Android */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

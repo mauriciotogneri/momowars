@@ -1,0 +1,10 @@
+{
+	"name": "momowars",
+	"description": "MomoWars",
+	"version": "1.0.0",
+	"dependencies": {
+		"firebase-admin": "^5.4.2",
+		"firebase-functions": "^0.7.1"
+	},
+	"private": true
+}

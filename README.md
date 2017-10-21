@@ -1,2 +1,3 @@
-# momowars
+# MomoWars
+
 Turn based strategy game.

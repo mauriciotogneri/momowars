@@ -1,0 +1,28 @@
+.filter-header
+{
+	cursor: pointer;
+}
+
+.filter-checkbox
+{
+	cursor: pointer;
+	margin-right: 2em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.filter-label
+{
+	padding-right: 1em;
+}
+
+.filter-card
+{
+	border-top: 1px solid F0F0F0;
+	border-bottom: 0 solid transparent;
+}
+
+.tab-pane
+{
+	padding: 1em;
+}
