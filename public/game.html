@@ -51,12 +51,30 @@
 
 <body ng-controller="controllerGame">
 
-	<div class="row" ng-show="!loading">
-		<div class="col-md-3" style="background-color:red">
-			
+	<div class="row screen-row" ng-show="!loading">
+		<div class="col-md-3" style="background-color:#EEEEEE;padding:0;margin:0">
+			<div class="input-group">
+				<div class="input-group-addon" style="border-radius:0">$</div>
+				<input type="text" class="form-control noselect" style="background-color:white;border-radius:0" disabled readonly value="1,000,000">
+			</div>
+
+			<div class="row" style="position:absolute;bottom:0;width:100%;padding: 1em 0 1em 0;margin:0">
+				<div class="col-6">
+					<button type="submit" class="btn btn-block btn-primary">
+						<i class="fa fa-users"></i>
+						Players
+					</button>
+				</div>
+				<div class="col-6">
+					<button type="submit" class="btn btn-block btn-success">
+						<i class="fa fa-user"></i>
+						Profile
+					</button>
+				</div>
+			</div>
 		</div>
 
-		<div class="col-md-9" style="background-color:green">
+		<div class="col-md-9" style="background-color:#DDDDDD">
 
 		</div>
 	</div>
