@@ -3,6 +3,8 @@
 	"description": "MomoWars",
 	"version": "1.0.0",
 	"dependencies": {
+		"sha.js": "^2.4.9",
+		"express": "^4.16.2",
 		"firebase-admin": "^5.4.2",
 		"firebase-functions": "^0.7.1"
 	},
