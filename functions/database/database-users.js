@@ -1,6 +1,6 @@
 function DatabaseUsers(database)
 {
-	this.bySessionToken = function(token, success, error)
+	this.bySessionToken = function(token, success, failure)
 	{
 		return root().where('session', '==', token).get()
 		.then(snapshot =>
@@ -18,12 +18,12 @@ function DatabaseUsers(database)
 			}
 			else
 			{
-				error()
+				failure()
 			}
 		})
 		.catch(error =>
 		{
-			error(error)
+			failure(error)
 		})
 	}
 

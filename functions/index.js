@@ -30,29 +30,78 @@ app.get('/v1/games', (request, response) =>
 	const sessionToken = request.get('Session-Token')
 
 	database.users.bySessionToken(sessionToken,
-	(user) =>
+	user =>
 	{
-		console.log(`User found: ${user.email}`)
+		const gameIds = []
+
+		user.games.forEach(ref =>
+		{
+			gameIds.push(ref.id)
+		})
 
 		response
 			.status(200)
-			.json(['123'])
+			.json(gameIds)
 	},
-	(error) =>
+	error =>
 	{
-		console.log('User not found')
+		response.status(401).send()
+	})
+})
 
+app.get('/v1/games/:gameId', (request, response) =>
+{
+	const sessionToken = request.get('Session-Token')
+	const gameId = request.param('gameId')
+
+	database.users.bySessionToken(sessionToken,
+	user =>
+	{
+		if (gameId)
+		{
+			var gameRef = null
+
+			user.games.forEach(ref =>
+			{
+				if (ref.id == gameId)
+				{
+					gameRef = ref
+				}
+			})
+
+			if (gameRef)
+			{
+				gameRef.get()
+				.then(snapshot =>
+				{
+					response
+						.status(200)
+						.json(snapshot.data())	
+				})
+				.catch(error =>
+				{
+					response.status(404).send()
+				})
+			}
+			else
+			{
+				response.status(404).send()
+			}
+		}
+		else
+		{
+			response.status(400).send()
+		}
+	},
+	error =>
+	{
 		response.status(401).send()
 	})
 })
 
 const api = express()
 api.use('/api', app)
-
 exports.api = functions.https.onRequest(api)
-
-
-//console.log()
 
 //exports.onTurnFinished = functions.database.ref('games/{gameId}').onUpdate(event =>
 //{
