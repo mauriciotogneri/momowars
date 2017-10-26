@@ -35,6 +35,8 @@ const apiExpress = express()
 apiExpress.use('/api', app)
 exports.api = functions.https.onRequest(apiExpress)
 
+// https://cloud.google.com/nodejs/docs/reference/firestore/0.8.x/DocumentReference#update
+
 //exports.onTurnFinished = functions.database.ref('games/{gameId}').onUpdate(event =>
 //{
 //	return trigger.onTurnFinished(event)

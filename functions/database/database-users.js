@@ -5,26 +5,51 @@ function DatabaseUsers(database)
 		return root().where('session', '==', token).get()
 		.then(snapshot =>
 		{
-			if (snapshot.size == 1)
+			singleUser(snapshot, success, failure)
+		})
+		.catch(error =>
+		{
+			failure(error)
+		})
+	}
+
+	this.byEmail = function(email, success, failure)
+	{
+		return root().where('email', '==', email).get()
+		.then(snapshot =>
+		{
+			singleUser(snapshot, success, failure)
+		})
+		.catch(error =>
+		{
+			failure(error)
+		})
+	}
+
+	function singleUser(snapshot, success, failure)
+	{
+		if (snapshot.size == 1)
+		{
+			var user = null
+
+			snapshot.forEach(doc =>
 			{
-				var user = null
+				user = doc
+			})
 
-				snapshot.forEach(doc =>
-				{
-					user = doc.data()
-				})
-
+			if (user)
+			{
 				success(user)
 			}
 			else
 			{
 				failure()
 			}
-		})
-		.catch(error =>
+		}
+		else
 		{
-			failure(error)
-		})
+			failure()
+		}
 	}
 
 	function root()
