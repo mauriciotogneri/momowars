@@ -25,6 +25,27 @@ app.post('/v1/login', (request, response) =>
 				.json({foo:"bar"})
 })
 
+app.get('/v1/games', (request, response) =>
+{
+	const sessionToken = request.get('Session-Token')
+
+	database.users.bySessionToken(sessionToken,
+	(user) =>
+	{
+		console.log(`User found: ${user.email}`)
+
+		response
+			.status(200)
+			.json(['123'])
+	},
+	(error) =>
+	{
+		console.log('User not found')
+
+		response.status(401).send()
+	})
+})
+
 const api = express()
 api.use('/api', app)
 

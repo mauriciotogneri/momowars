@@ -1,19 +1,12 @@
 function Database(admin)
 {
-	this.ref = function(path)
+	this.root = function()
 	{
-		return admin.database().ref(path)
-	}
-
-	this.root = function(callback)
-	{
-		return this.ref('/').once('value', snap =>
-		{
-			callback(snap.val())
-		})
+		return admin.firestore()
 	}
 
 	this.games = new (require('./database-games.js'))(this)
+	this.users = new (require('./database-users.js'))(this)
 }
 
 module.exports = Database

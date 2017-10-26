@@ -16,7 +16,7 @@
 			},
 			{
 				"source": "/",
-				"destination": "/login.html"
+				"destination": "/index.html"
 			},
 			{
 				"source": "/game",

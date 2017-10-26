@@ -1,3 +1,4 @@
+const CONTROLLER_DASHBOARD  = 'controllerDashboard'
 const CONTROLLER_LOGIN = 'controllerLogin'
 const CONTROLLER_GAME  = 'controllerGame'
 
