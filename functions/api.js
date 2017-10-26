@@ -37,15 +37,7 @@ function Api(database)
 		{
 			if (gameId)
 			{
-				var gameRef = null
-	
-				user.games.forEach(ref =>
-				{
-					if (ref.id == gameId)
-					{
-						gameRef = ref
-					}
-				})
+				const gameRef = user.games.find(ref => ref.id == gameId)
 	
 				if (gameRef)
 				{
