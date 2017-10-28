@@ -22,7 +22,7 @@ function ApiGames(database)
 			}
 			else
 			{
-				response.status(404).send()
+				response.status(403).send()
 			}
 		})
 		.catch(error =>
