@@ -1,18 +1,17 @@
 'use strict'
 
 const functions = require('firebase-functions')
-const admin = require('firebase-admin').initializeApp(functions.config().firebase)
-
+const admin     = require('firebase-admin').initializeApp(functions.config().firebase)
 const express   = require('express')
 const shajs     = require('sha.js')
 const models    = require('./models/models.js')
 const database  = new (require('./database/database.js'))(admin, models)
 const api       = new (require('./api/api.js'))(database)
-const app = express()
+const app       = express()
 
 // =============================================================================
 
-app.post('/v1/login', (request, response) =>
+app.post('/v1/session', (request, response) =>
 {
 	return api.sessions.login(request, response, shajs)
 })

@@ -5,25 +5,25 @@ function ApiGames(database)
 		const sessionToken = request.get('Session-Token')
 		const gameId = request.param('gameId')
 	
-		database.accounts.bySessionToken(sessionToken,
-		accountDoc =>
+		database.accounts.bySessionToken(sessionToken)
+		.then(accountDoc =>
 		{
 			if (gameId)
 			{
-				const gameRef = accountDoc.data().games.find(ref => ref.id == gameId)
+				const gameRef = accountDoc.gameRef(gameId)
 	
 				if (gameRef)
 				{
-					gameRef.get()
-					.then(snapshot =>
+					database.games.byRef(gameRef)
+					.then(gameDoc =>
 					{
 						response
 							.status(200)
-							.json(snapshot.data())	
+							.json(gameDoc.json())	
 					})
 					.catch(error =>
 					{
-						response.status(404).send()
+						response.status(500).send()
 					})
 				}
 				else
@@ -35,8 +35,8 @@ function ApiGames(database)
 			{
 				response.status(400).send()
 			}
-		},
-		error =>
+		})
+		.catch(error =>
 		{
 			response.status(401).send()
 		})

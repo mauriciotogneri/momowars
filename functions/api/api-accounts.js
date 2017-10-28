@@ -9,7 +9,7 @@ function ApiAccounts(database)
 		{
 			response
 				.status(200)
-				.json(accountDoc.data().games.map(ref => ref.id))
+				.json(accountDoc.json())
 		})
 		.catch(error =>
 		{

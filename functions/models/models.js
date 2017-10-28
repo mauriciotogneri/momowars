@@ -1,3 +1,4 @@
 module.exports = {
-	accountDoc: require('./accountDoc.js')
+	accountDoc: require('./model-account-doc.js'),
+	gameDoc: require('./model-game-doc.js')
 }

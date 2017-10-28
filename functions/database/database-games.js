@@ -1,26 +1,14 @@
 function DatabaseGame(database, models)
 {
-	this.byCode = function(code, callback)
+	this.byRef = function(ref)
 	{
-		return database.ref('games').once('value', snap =>
+		return new Promise((resolve, reject) => 
 		{
-			var result = null
-
-			snap.forEach(entry =>
+			ref.get().then(snapshot =>
 			{
-				if (entry.val().code === code)
-				{
-					result = entry
-				}
+				resolve(new models.gameDoc(snapshot))
 			})
-
-			callback(result)
 		})
-	}
-
-	this.root = function(callback)
-	{
-		return database.ref('games').once('value', callback)
 	}
 }
 
