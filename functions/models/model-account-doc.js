@@ -21,7 +21,8 @@ function AccountDoc(doc)
 	{
 		return {
 			email: data.email,
-			nickname: data.nickname
+			nickname: data.nickname,
+			games: data.games.map(game => game.ref.id)
 		}
 	}
 }
