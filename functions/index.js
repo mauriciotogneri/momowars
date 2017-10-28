@@ -3,7 +3,6 @@
 const functions = require('firebase-functions')
 const admin     = require('firebase-admin').initializeApp(functions.config().firebase)
 const express   = require('express')
-const shajs     = require('sha.js')
 const models    = require('./models/models.js')
 const database  = new (require('./database/database.js'))(admin.firestore(), models)
 const api       = new (require('./api/api.js'))(database)
@@ -11,17 +10,11 @@ const app       = express()
 
 // =================================== SESSION ==========================================
 
-app.post('/v1/session', (request, response) =>
-{
-	api.sessions.login(request, response, shajs)
-})
+app.post('/v1/session', api.sessions.login)
 
 // ==================================== ACCOUNT =========================================
 
-app.get('/v1/account', (request, response) =>
-{
-	api.accounts.getAccount(request, response)
-})
+app.get('/v1/account', api.accounts.getAccount)
 
 app.post('/v1/account', (request, response) =>
 {
@@ -37,10 +30,7 @@ app.patch('/v1/account', (request, response) =>
 
 // ====================================== GAMES =========================================
 
-app.get('/v1/games/:gameId', (request, response) =>
-{
-	api.games.getGame(request, response)
-})
+app.get('/v1/games/:gameId', api.games.getGame)
 
 app.patch('/v1/games/:gameId', (request, response) =>
 {
@@ -101,20 +91,6 @@ app.get('/v1/maps', (request, response) =>
 app.get('/v1/maps/:mapId', (request, response) =>
 {
 	// TODO: get map
-	response.status(501).send()
-})
-
-app.post('/v1/games/:gameId', (request, response) =>
-{
-	// TODO: join game
-	// game_id
-	response.status(501).send()
-})
-
-app.delete('/v1/games/:gameId', (request, response) =>
-{
-	// TODO: leave game
-	// game_id
 	response.status(501).send()
 })
 

@@ -1,6 +1,8 @@
 function ApiSessions(database)
 {
-	this.login = function(request, response, shajs)
+	const shajs = require('sha.js')
+
+	this.login = function(request, response)
 	{
 		const email    = request.body.email
 		const password = request.body.password
