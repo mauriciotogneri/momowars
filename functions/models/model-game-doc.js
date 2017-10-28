@@ -5,7 +5,8 @@ function GameDoc(doc)
 	this.json = function()
 	{
 		return {
-			foo: 123
+			map: data.map,
+			status: data.status
 		}
 	}
 }

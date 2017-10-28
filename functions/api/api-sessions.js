@@ -23,10 +23,6 @@ function ApiSessions(database)
 							.set('Session-Token', sessionId)
 							.send()
 					})
-					.catch(error =>
-					{
-						response.status(500).send()
-					})
 				}
 				else
 				{
