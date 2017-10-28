@@ -5,7 +5,7 @@ const admin     = require('firebase-admin').initializeApp(functions.config().fir
 const express   = require('express')
 const shajs     = require('sha.js')
 const models    = require('./models/models.js')
-const database  = new (require('./database/database.js'))(admin, models)
+const database  = new (require('./database/database.js'))(admin.firestore(), models)
 const api       = new (require('./api/api.js'))(database)
 const app       = express()
 
@@ -13,14 +13,14 @@ const app       = express()
 
 app.post('/v1/session', (request, response) =>
 {
-	return api.sessions.login(request, response, shajs)
+	api.sessions.login(request, response, shajs)
 })
 
 // ==================================== ACCOUNT =========================================
 
 app.get('/v1/account', (request, response) =>
 {
-	return api.accounts.getAccount(request, response)
+	api.accounts.getAccount(request, response)
 })
 
 app.post('/v1/account', (request, response) =>
@@ -39,7 +39,7 @@ app.patch('/v1/account', (request, response) =>
 
 app.get('/v1/games/:gameId', (request, response) =>
 {
-	return api.games.getGame(request, response)
+	api.games.getGame(request, response)
 })
 
 app.patch('/v1/games/:gameId', (request, response) =>

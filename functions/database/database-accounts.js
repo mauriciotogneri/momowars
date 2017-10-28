@@ -30,7 +30,7 @@ function DatabaseAccounts(database, models)
 
 	function root()
 	{
-		return database.root().collection('accounts')
+		return database.collection('accounts')
 	}
 }
 
