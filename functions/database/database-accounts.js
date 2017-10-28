@@ -1,4 +1,4 @@
-function DatabaseAccounts(database)
+function DatabaseAccounts(database, models)
 {
 	this.bySessionToken = function(token)
 	{
@@ -18,7 +18,7 @@ function DatabaseAccounts(database)
 			{
 				if (!snapshot.empty)
 				{
-					resolve(snapshot.docs[0])
+					resolve(new models.accountDoc(snapshot.docs[0]))
 				}
 				else
 				{

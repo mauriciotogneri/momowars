@@ -1,4 +1,4 @@
-function DatabaseGame(database)
+function DatabaseGame(database, models)
 {
 	this.byCode = function(code, callback)
 	{
