@@ -15,9 +15,13 @@ function ApiGames(api, database)
 				database.games.byRef(gameRef)
 				.then(gameDoc =>
 				{
-					response
-						.status(200)
-						.json(gameDoc.json())	
+					database.games.players(gameRef)
+					.then(playerDocs =>
+					{
+						response
+							.status(200)
+							.json(gameDoc.json(playerDocs))
+					})
 				})
 			}
 			else

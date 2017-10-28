@@ -2,14 +2,14 @@ function GameDoc(doc)
 {
 	const data = doc.data()
 
-	this.json = function()
+	this.json = function(playerDocs)
 	{
 		return {
 			id: doc.id,
 			status: data.status,
 			map: data.map,
 			resources: 0, // TODO
-			players: [], // TODO
+			players: playerDocs.map(player => player.json()), // TODO
 			cells: [] // TODO
 		}
 	}
