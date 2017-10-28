@@ -7,15 +7,15 @@ function Api(database)
 
 		if (email && password)
 		{
-			database.users.byEmail(email,
-			userDoc =>
+			database.accounts.byEmail(email)
+			.then(accountDoc =>
 			{
-				if (userDoc.data().password == hash(shajs, password))
+				if (accountDoc.data().password == hash(shajs, password))
 				{
 					const seed = Math.random().toString(36).substring(2) + new Date().getTime().toString(36)
 					const sessionId = hash(shajs, seed)
 
-					userDoc.ref.update({session: sessionId})
+					accountDoc.ref.update({session: sessionId})
 					.then(result =>
 					{
 						response
@@ -32,8 +32,8 @@ function Api(database)
 				{
 					response.status(401).send()
 				}
-			},
-			error =>
+			})
+			.catch(error =>
 			{
 				response.status(404).send()
 			})
@@ -48,12 +48,12 @@ function Api(database)
 	{
 		const sessionToken = request.get('Session-Token')
 		
-		database.users.bySessionToken(sessionToken,
-		userDoc =>
+		database.accounts.bySessionToken(sessionToken,
+		accountDoc =>
 		{
 			response
 				.status(200)
-				.json(userDoc.data().games.map(ref => ref.id))
+				.json(accountDoc.data().games.map(ref => ref.id))
 		},
 		error =>
 		{
@@ -66,12 +66,12 @@ function Api(database)
 		const sessionToken = request.get('Session-Token')
 		const gameId = request.param('gameId')
 	
-		database.users.bySessionToken(sessionToken,
-		userDoc =>
+		database.accounts.bySessionToken(sessionToken,
+		accountDoc =>
 		{
 			if (gameId)
 			{
-				const gameRef = userDoc.data().games.find(ref => ref.id == gameId)
+				const gameRef = accountDoc.data().games.find(ref => ref.id == gameId)
 	
 				if (gameRef)
 				{

@@ -1,13 +1,13 @@
 'use strict'
 
-const admin = require('firebase-admin')
-admin.initializeApp({
+const functions = require('firebase-functions')
+const admin = require('firebase-admin').initializeApp(functions.config().firebase)
+/*admin.initializeApp({
 	credential: admin.credential.applicationDefault(),
 	databaseURL: 'https://momowars.firebaseio.com',
 	storageBucket: 'momowars.appspot.com'
-})
+})*/
 
-const functions = require('firebase-functions')
 const express   = require('express')
 const shajs     = require('sha.js')
 const database  = new (require('./database/database.js'))(admin)
@@ -36,6 +36,8 @@ apiExpress.use('/api', app)
 exports.api = functions.https.onRequest(apiExpress)
 
 // https://cloud.google.com/nodejs/docs/reference/firestore/0.8.x/DocumentReference#update
+
+// firebase deploy -P development|production
 
 //exports.onTurnFinished = functions.database.ref('games/{gameId}').onUpdate(event =>
 //{

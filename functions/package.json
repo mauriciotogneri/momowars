@@ -1,7 +1,7 @@
 {
 	"name": "momowars",
 	"description": "MomoWars",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"dependencies": {
 		"sha.js": "^2.4.9",
 		"express": "^4.16.2",

@@ -5,8 +5,8 @@ function Database(admin)
 		return admin.firestore()
 	}
 
-	this.games = new (require('./database-games.js'))(this)
-	this.users = new (require('./database-users.js'))(this)
+	this.games    = new (require('./database-games.js'))(this)
+	this.accounts = new (require('./database-accounts.js'))(this)
 }
 
 module.exports = Database
