@@ -1,4 +1,4 @@
-function ApiSessions(database)
+function ApiSessions(api, database)
 {
 	const shajs = require('sha.js')
 
@@ -22,7 +22,7 @@ function ApiSessions(database)
 					{
 						response
 							.status(200)
-							.set('Session-Token', sessionId)
+							.set(api.SESSION_TOKEN, sessionId)
 							.send()
 					})
 				}

@@ -1,8 +1,8 @@
-function ApiAccounts(database)
+function ApiAccounts(api, database)
 {
 	this.getAccount = function(request, response)
 	{
-		const sessionToken = request.get('Session-Token')
+		const sessionToken = request.get(api.SESSION_TOKEN)
 		
 		database.accounts.bySessionToken(sessionToken)
 		.then(accountDoc =>

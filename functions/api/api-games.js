@@ -1,8 +1,8 @@
-function ApiGames(database)
+function ApiGames(api, database)
 {
 	this.getGame = function(request, response)
 	{
-		const sessionToken = request.get('Session-Token')
+		const sessionToken = request.get(api.SESSION_TOKEN)
 		const gameId = request.param('gameId')
 	
 		database.accounts.bySessionToken(sessionToken)
