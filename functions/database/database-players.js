@@ -4,23 +4,19 @@ function DatabasePlayers(database, models)
 	{
 		return new Promise((resolve, reject) => 
 		{
-			gameRef.collection('players').get().then(snapshot =>
+			gameRef.collection('players').get()
+			.then(docList =>
 			{
-				const accountRefs = []
+				const accountRefs = docList.docs.map(doc => doc.data().account)
 
-				snapshot.forEach(doc =>
-				{
-					accountRefs.push(doc.data().account.get())
-				})
-
-				Promise.all(accountRefs)
+				database.accounts.listByRef(accountRefs)
 				.then(accountDocs =>
 				{
 					const playerDocs = []
 
-					for (var i = 0; i < snapshot.docs.length; i++)
+					for (var i = 0; i < docList.docs.length; i++)
 					{
-						playerDocs.push(new models.playerDoc(snapshot.docs[i], accountDocs[i]))
+						playerDocs.push(new models.playerDoc(docList.docs[i], accountDocs[i]))
 					}
 
 					resolve(playerDocs)

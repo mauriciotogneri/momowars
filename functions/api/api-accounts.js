@@ -5,11 +5,11 @@ function ApiAccounts(api, database)
 		const sessionToken = request.get(api.SESSION_TOKEN)
 		
 		database.accounts.bySessionToken(sessionToken)
-		.then(accountDoc =>
+		.then(doc =>
 		{
 			response
 				.status(200)
-				.json(accountDoc.json())
+				.json(doc.json())
 		})
 		.catch(error =>
 		{

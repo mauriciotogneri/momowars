@@ -4,9 +4,9 @@ function DatabaseGame(database, models)
 	{
 		return new Promise((resolve, reject) => 
 		{
-			ref.get().then(snapshot =>
+			ref.get().then(doc =>
 			{
-				resolve(new models.gameDoc(snapshot))
+				resolve(new models.gameDoc(doc))
 			})
 		})
 	}

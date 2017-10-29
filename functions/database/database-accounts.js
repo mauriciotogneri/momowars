@@ -10,15 +10,20 @@ function DatabaseAccounts(database, models)
 		return getAccount(root().where('email', '==', email).get())
 	}
 
+	this.listByRef = function(accountRefs)
+	{
+		return Promise.all(accountRefs.map(ref => ref.get()))
+	}
+
 	function getAccount(queryPromise)
 	{
 		return new Promise((resolve, reject) => 
 		{
-			queryPromise.then(snapshot =>
+			queryPromise.then(docList =>
 			{
-				if (!snapshot.empty)
+				if (!docList.empty)
 				{
-					resolve(new models.accountDoc(snapshot.docs[0]))
+					resolve(new models.accountDoc(docList.docs[0]))
 				}
 				else
 				{
@@ -30,7 +35,7 @@ function DatabaseAccounts(database, models)
 
 	function root()
 	{
-		return database.collection('accounts')
+		return database.root.collection('accounts')
 	}
 }
 
