@@ -1,4 +1,4 @@
-function AccountDoc(doc)
+function DocumentAccount(doc)
 {
 	const data = doc.data()
 	
@@ -27,4 +27,4 @@ function AccountDoc(doc)
 	}
 }
 
-module.exports = AccountDoc
+module.exports = DocumentAccount

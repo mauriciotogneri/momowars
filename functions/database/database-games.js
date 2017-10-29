@@ -1,4 +1,4 @@
-function DatabaseGame(database, models)
+function DatabaseGame(database, documents)
 {
 	this.byRef = function(ref)
 	{
@@ -6,7 +6,7 @@ function DatabaseGame(database, models)
 		{
 			ref.get().then(doc =>
 			{
-				resolve(new models.gameDoc(doc))
+				resolve(new documents.game(doc))
 			})
 		})
 	}

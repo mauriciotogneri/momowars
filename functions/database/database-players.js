@@ -1,4 +1,4 @@
-function DatabasePlayers(database, models)
+function DatabasePlayers(database, documents)
 {
 	this.byGameRef = function(gameRef)
 	{
@@ -16,7 +16,7 @@ function DatabasePlayers(database, models)
 
 					for (var i = 0; i < docList.docs.length; i++)
 					{
-						playerDocs.push(new models.playerDoc(docList.docs[i], accountDocs[i]))
+						playerDocs.push(new documents.player(docList.docs[i], accountDocs[i]))
 					}
 
 					resolve(playerDocs)

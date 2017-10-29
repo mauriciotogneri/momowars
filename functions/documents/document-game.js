@@ -1,4 +1,4 @@
-function GameDoc(doc)
+function DocumentGame(doc)
 {
 	const data = doc.data()
 
@@ -15,17 +15,7 @@ function GameDoc(doc)
 	}
 }
 
-/*players: [
-	{
-		nickname: string,
-		color: string,
-		status: turn_status,
-		cells: int,
-		bases: int,
-		units: int
-	}
-]
-
+/*
 cells: [
 	{
 		id: string,
@@ -50,4 +40,4 @@ cells: [
 	}
 ]*/
 
-module.exports = GameDoc
+module.exports = DocumentGame

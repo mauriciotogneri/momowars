@@ -1,4 +1,4 @@
-function DatabaseAccounts(database, models)
+function DatabaseAccounts(database, documents)
 {
 	this.bySessionToken = function(token)
 	{
@@ -23,7 +23,7 @@ function DatabaseAccounts(database, models)
 			{
 				if (!docList.empty)
 				{
-					resolve(new models.accountDoc(docList.docs[0]))
+					resolve(new documents.account(docList.docs[0]))
 				}
 				else
 				{
