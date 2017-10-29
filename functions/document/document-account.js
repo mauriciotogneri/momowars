@@ -2,9 +2,14 @@ function DocumentAccount(doc)
 {
 	const data = doc.data()
 	
+	this.email    = data.email
+	this.nickname = data.nickname
+	this.password = data.password
+	this.games    = data.games
+
 	this.hasPassword = function(password)
 	{
-		return data.password == password
+		return (this.password == password)
 	}
 
 	this.update = function(value)
@@ -14,16 +19,7 @@ function DocumentAccount(doc)
 
 	this.gameRef = function(gameId)
 	{
-		return data.games.find(ref => ref.id == gameId)
-	}
-
-	this.json = function()
-	{
-		return {
-			email: data.email,
-			nickname: data.nickname,
-			games: data.games.map(game => game.ref.id)
-		}
+		return this.games.find(ref => ref.id == gameId)
 	}
 }
 

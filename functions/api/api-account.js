@@ -1,4 +1,4 @@
-function ApiAccount(api, database)
+function ApiAccount(api, database, model)
 {
 	this.getAccount = function(request, response)
 	{
@@ -9,7 +9,7 @@ function ApiAccount(api, database)
 		{
 			response
 				.status(200)
-				.json(doc.json())
+				.json(new model.account(doc).json())
 		})
 		.catch(error =>
 		{

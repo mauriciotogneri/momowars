@@ -1,4 +1,4 @@
-function ApiSession(api, database)
+function ApiSession(api, database, model)
 {
 	const shajs = require('sha.js')
 

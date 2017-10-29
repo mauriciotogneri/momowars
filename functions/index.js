@@ -4,9 +4,10 @@ const functions = require('firebase-functions')
 const admin     = require('firebase-admin').initializeApp(functions.config().firebase)
 const express   = require('express')
 const document  = require('./document/document.js')
+const model     = require('./model/model.js')
 const constants = require('./constants.js')
 const database  = new (require('./database/database.js'))(admin.firestore(), document)
-const api       = new (require('./api/api.js'))(database)
+const api       = new (require('./api/api.js'))(database, model)
 const app       = express()
 
 // =================================== SESSION ==========================================

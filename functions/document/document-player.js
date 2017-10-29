@@ -1,26 +1,10 @@
-function DocumentPlayer(player, account)
+function DocumentPlayer(playerDoc, accountDoc)
 {
-	const data = player.data()
+	const data = playerDoc.data()
 
-	this.json = function(accountId)
-	{
-		return {
-			nickname: account.data().nickname,
-			color: data.color,
-			status: data.status
-		}
-	}
+	this.nickname = accountDoc.data().nickname
+	this.color    = playerDoc.color
+	this.status   = playerDoc.status
 }
-
-/*players: [
-	{
-			nickname: string,
-			color: string,
-			status: turn_status,
-		cells: int,
-		bases: int,
-		units: int
-	}
-]*/
 
 module.exports = DocumentPlayer

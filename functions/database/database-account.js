@@ -27,6 +27,10 @@ function DatabaseAccount(database, document)
 		return Promise.all(accountRefs.map(ref => ref.get()))
 	}
 
+	/**
+	 * @param {Query} queryPromise
+	 * @returns {Promise<DocumentAccount>}
+	 */
 	function getAccount(queryPromise)
 	{
 		return new Promise((resolve, reject) => 

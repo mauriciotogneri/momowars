@@ -1,4 +1,4 @@
-function ApiGame(api, database)
+function ApiGame(api, database, model)
 {
 	this.getGame = function(request, response)
 	{
@@ -18,9 +18,12 @@ function ApiGame(api, database)
 					database.player.byGameRef(gameRef)
 					.then(playerDocs =>
 					{
+						const cellDocs = null
+						const unitDocs = null
+
 						response
 							.status(200)
-							.json(gameDoc.json(playerDocs))
+							.json(new model.game(accountDoc, gameDoc, playerDocs, cellDocs, unitDocs).json())
 					})
 				})
 			}
