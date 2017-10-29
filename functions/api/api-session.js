@@ -1,4 +1,4 @@
-function ApiSessions(api, database)
+function ApiSession(api, database)
 {
 	const shajs = require('sha.js')
 
@@ -9,7 +9,7 @@ function ApiSessions(api, database)
 
 		if (email && password)
 		{
-			database.accounts.byEmail(email)
+			database.account.byEmail(email)
 			.then(accountDoc =>
 			{
 				if (accountDoc.hasPassword(hash(shajs, password)))
@@ -48,4 +48,4 @@ function ApiSessions(api, database)
 	}
 }
 
-module.exports = ApiSessions
+module.exports = ApiSession

@@ -2,9 +2,9 @@ function Api(database)
 {
 	this.SESSION_TOKEN = 'Session-Token'
 
-	this.sessions = new (require('./api-sessions.js'))(this, database)
-	this.accounts = new (require('./api-accounts.js'))(this, database)
-	this.games    = new (require('./api-games.js'))(this, database)
+	this.session = new (require('./api-session.js'))(this, database)
+	this.account = new (require('./api-account.js'))(this, database)
+	this.game    = new (require('./api-game.js'))(this, database)
 }
 
 module.exports = Api

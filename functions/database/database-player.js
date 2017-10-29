@@ -1,4 +1,4 @@
-function DatabasePlayers(database, documents)
+function DatabasePlayer(database, document)
 {
 	this.byGameRef = function(gameRef)
 	{
@@ -9,14 +9,14 @@ function DatabasePlayers(database, documents)
 			{
 				const accountRefs = docList.docs.map(doc => doc.data().account)
 
-				database.accounts.listByRef(accountRefs)
+				database.account.listByRef(accountRefs)
 				.then(accountDocs =>
 				{
 					const playerDocs = []
 
 					for (var i = 0; i < docList.docs.length; i++)
 					{
-						playerDocs.push(new documents.player(docList.docs[i], accountDocs[i]))
+						playerDocs.push(new document.player(docList.docs[i], accountDocs[i]))
 					}
 
 					resolve(playerDocs)
@@ -26,4 +26,4 @@ function DatabasePlayers(database, documents)
 	}
 }
 
-module.exports = DatabasePlayers
+module.exports = DatabasePlayer

@@ -3,19 +3,19 @@
 const functions = require('firebase-functions')
 const admin     = require('firebase-admin').initializeApp(functions.config().firebase)
 const express   = require('express')
-const documents = require('./documents/documents.js')
+const document  = require('./document/document.js')
 const constants = require('./constants.js')
-const database  = new (require('./database/database.js'))(admin.firestore(), documents)
+const database  = new (require('./database/database.js'))(admin.firestore(), document)
 const api       = new (require('./api/api.js'))(database)
 const app       = express()
 
 // =================================== SESSION ==========================================
 
-app.post('/v1/session', api.sessions.login)
+app.post('/v1/session', api.session.login)
 
 // ==================================== ACCOUNT =========================================
 
-app.get('/v1/account', api.accounts.getAccount)
+app.get('/v1/account', api.account.getAccount)
 
 app.post('/v1/account', (request, response) =>
 {
@@ -31,7 +31,7 @@ app.patch('/v1/account', (request, response) =>
 
 // ====================================== GAMES =========================================
 
-app.get('/v1/games/:gameId', api.games.getGame)
+app.get('/v1/games/:gameId', api.game.getGame)
 
 app.patch('/v1/games/:gameId', (request, response) =>
 {

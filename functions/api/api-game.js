@@ -1,21 +1,21 @@
-function ApiGames(api, database)
+function ApiGame(api, database)
 {
 	this.getGame = function(request, response)
 	{
 		const sessionToken = request.get(api.SESSION_TOKEN)
 		const gameId = request.param('gameId')
 	
-		database.accounts.bySessionToken(sessionToken)
+		database.account.bySessionToken(sessionToken)
 		.then(accountDoc =>
 		{
 			const gameRef = accountDoc.gameRef(gameId)
 
 			if (gameRef)
 			{
-				database.games.byRef(gameRef)
+				database.game.byRef(gameRef)
 				.then(gameDoc =>
 				{
-					database.players.byGameRef(gameRef)
+					database.player.byGameRef(gameRef)
 					.then(playerDocs =>
 					{
 						response
@@ -36,4 +36,4 @@ function ApiGames(api, database)
 	}
 }
 
-module.exports = ApiGames
+module.exports = ApiGame

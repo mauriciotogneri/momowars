@@ -1,10 +1,10 @@
-function ApiAccounts(api, database)
+function ApiAccount(api, database)
 {
 	this.getAccount = function(request, response)
 	{
 		const sessionToken = request.get(api.SESSION_TOKEN)
 		
-		database.accounts.bySessionToken(sessionToken)
+		database.account.bySessionToken(sessionToken)
 		.then(doc =>
 		{
 			response
@@ -18,4 +18,4 @@ function ApiAccounts(api, database)
 	}
 }
 
-module.exports = ApiAccounts
+module.exports = ApiAccount

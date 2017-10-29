@@ -1,4 +1,4 @@
-function DatabaseAccounts(database, documents)
+function DatabaseAccount(database, document)
 {
 	this.bySessionToken = function(token)
 	{
@@ -23,7 +23,7 @@ function DatabaseAccounts(database, documents)
 			{
 				if (!docList.empty)
 				{
-					resolve(new documents.account(docList.docs[0]))
+					resolve(new document.account(docList.docs[0]))
 				}
 				else
 				{
@@ -39,4 +39,4 @@ function DatabaseAccounts(database, documents)
 	}
 }
 
-module.exports = DatabaseAccounts
+module.exports = DatabaseAccount

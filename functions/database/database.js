@@ -1,10 +1,10 @@
-function Database(firestore, documents)
+function Database(firestore, document)
 {
 	this.root = firestore
 
-	this.accounts = new (require('./database-accounts.js'))(this, documents)
-	this.games    = new (require('./database-games.js'))(this, documents)
-	this.players  = new (require('./database-players.js'))(this, documents)
+	this.account = new (require('./database-account.js'))(this, document)
+	this.game    = new (require('./database-game.js'))(this, document)
+	this.player  = new (require('./database-player.js'))(this, document)
 }
 
 module.exports = Database
