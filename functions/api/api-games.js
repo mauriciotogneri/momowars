@@ -15,7 +15,7 @@ function ApiGames(api, database)
 				database.games.byRef(gameRef)
 				.then(gameDoc =>
 				{
-					database.games.players(gameRef)
+					database.players.byGameRef(gameRef)
 					.then(playerDocs =>
 					{
 						response
