@@ -2,8 +2,8 @@ package api
 
 class ApiSession
 {
-    fun login(request:dynamic, response:dynamic):Unit
+    fun login(request: dynamic, response: dynamic)
     {
-        response.status(200).send("AKANT 2")
+        response.status(200).send("LOGIN")
     }
 }
