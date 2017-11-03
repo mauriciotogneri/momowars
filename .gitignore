@@ -2,9 +2,20 @@
 .vscode/
 .editorconfig
 
+#build
+build/
+
+#gradle
+.gradle/
+
+#idea
+.idea/
+
+#firebase
+functions/
+
 # libs
 node_modules/
-functions/node_modules/
 functions/package-lock.json
 firebase-debug.log
 
