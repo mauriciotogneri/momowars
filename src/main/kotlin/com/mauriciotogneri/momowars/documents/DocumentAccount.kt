@@ -2,6 +2,7 @@ package com.mauriciotogneri.momowars.documents
 
 import com.mauriciotogneri.momowars.firebase.DocumentReference
 import com.mauriciotogneri.momowars.firebase.DocumentSnapshot
+import kotlin.js.Promise
 
 class DocumentAccount(document: DocumentSnapshot)
 {
@@ -18,7 +19,7 @@ class DocumentAccount(document: DocumentSnapshot)
         return (password == text)
     }
 
-    fun update(value: dynamic)
+    fun update(value: dynamic): Promise<Unit>
     {
         return doc.ref.update(value)
     }
