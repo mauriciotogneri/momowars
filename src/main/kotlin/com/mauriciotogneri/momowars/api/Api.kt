@@ -1,6 +1,6 @@
 package com.mauriciotogneri.momowars.api
 
-class Api
+object Api
 {
     val session = ApiSession()
     val account = ApiAccount()

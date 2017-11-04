@@ -21,19 +21,17 @@ class ApiSession
 
                     if (!docList.empty)
                     {
-                        response.status(200).send(docList.docs[0].data())
+                        response.status(200).send(docList.docs[0].data().email)
                     }
                     else
                     {
-                        response.status(200).send("ERROR")
+                        response.status(404).send()
                     }
                 }
         }
         else
         {
-            response.status(400).send("")
+            response.status(400).send()
         }
-
-        //response.status(200).send("LOGIN")
     }
 }

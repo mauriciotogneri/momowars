@@ -5,4 +5,6 @@ external class Response
     fun status(code: Int): Response
 
     fun send(value: dynamic): Response
+
+    fun send(): Response
 }

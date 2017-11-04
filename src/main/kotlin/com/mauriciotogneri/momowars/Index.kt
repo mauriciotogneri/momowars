@@ -14,15 +14,14 @@ fun main(args: Array<String>)
 
     val express = require("express")
     val app = express()
-    val api = Api()
 
     // =================================== SESSION ==========================================
 
-    app.post("/v1/session", api.session::login)
+    app.post("/v1/session", Api.session::login)
 
     // ==================================== ACCOUNT =========================================
 
-    app.get("/v1/account", api.account::getAccount)
+    app.get("/v1/account", Api.account::getAccount)
 
     app.post("/v1/account", { _, response ->
         // TODO: create account
@@ -36,7 +35,7 @@ fun main(args: Array<String>)
 
     // ====================================== GAMES =========================================
 
-    app.get("/v1/games/:gameId", api.game::getGame)
+    app.get("/v1/games/:gameId", Api.game::getGame)
 
     app.patch("/v1/games/:gameId", { _, response ->
         // TODO: end turn
