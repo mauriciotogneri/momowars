@@ -8,5 +8,5 @@ external class Response
 
     fun send(value: dynamic): Response
 
-    fun send(): Response
+    fun send(): Nothing
 }

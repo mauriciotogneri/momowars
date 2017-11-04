@@ -19,7 +19,7 @@ class DocumentAccount(document: DocumentSnapshot)
         return (password == text)
     }
 
-    fun update(value: dynamic): Promise<Unit>
+    fun update(value: dynamic): Promise<Nothing>
     {
         return doc.ref.update(value)
     }

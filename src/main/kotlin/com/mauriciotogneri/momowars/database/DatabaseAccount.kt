@@ -36,7 +36,7 @@ object DatabaseAccount
                 }
                 else
                 {
-                    reject
+                    reject(Throwable())
                 }
             })
         }

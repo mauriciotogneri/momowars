@@ -9,7 +9,6 @@ import kotlin.js.Date
 import kotlin.js.Math
 import kotlin.js.json
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
 class ApiSession
 {
     fun login(request: Request, response: Response)

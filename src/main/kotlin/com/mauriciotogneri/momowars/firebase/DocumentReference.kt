@@ -6,5 +6,5 @@ external class DocumentReference
 {
     val id: String
 
-    fun update(value: dynamic): Promise<Unit>
+    fun update(value: dynamic): Promise<Nothing>
 }
