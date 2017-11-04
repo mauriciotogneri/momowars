@@ -1,9 +1,6 @@
-# editor
-.vscode/
-.editorconfig
-
 #build
 build/
+out/
 
 #gradle
 .gradle/
@@ -13,9 +10,4 @@ build/
 
 #firebase
 functions/
-
-# libs
-firebase-debug.log
-
-#config
 .firebaserc

@@ -1,15 +1,17 @@
 package com.mauriciotogneri.momowars.database
 
+import com.mauriciotogneri.momowars.firebase.CollectionReference
+import com.mauriciotogneri.momowars.firebase.DocumentSnapshot
 import kotlin.js.Promise
 
 class DatabaseAccount
 {
-    fun bySessionToken(token: String): Promise<String>
+    fun bySessionToken(token: String): Promise<DocumentSnapshot>
     {
         return getAccount(root().where("session", "==", token).get())
     }
 
-    fun byEmail(email: String): Promise<String>
+    fun byEmail(email: String): Promise<DocumentSnapshot>
     {
         return getAccount(root().where("email", "==", email).get())
     }
@@ -21,7 +23,7 @@ class DatabaseAccount
         return Promise.all()
     }*/
 
-    private fun getAccount(queryPromise: Promise<dynamic>): Promise<String>
+    private fun getAccount(queryPromise: Promise<dynamic>): Promise<DocumentSnapshot>
     {
         return Promise { resolve, reject ->
 
@@ -40,7 +42,7 @@ class DatabaseAccount
         }
     }
 
-    private fun root(): dynamic
+    private fun root(): CollectionReference
     {
         return Database.firestore.collection("accounts")
     }
