@@ -1,6 +1,8 @@
 package com.mauriciotogneri.momowars.database
 
+import com.mauriciotogneri.momowars.firebase.Firestore
+
 object Database
 {
-    var firestore: dynamic = null
+    lateinit var firestore: Firestore
 }

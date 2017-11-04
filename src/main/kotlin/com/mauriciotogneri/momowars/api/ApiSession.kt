@@ -17,17 +17,17 @@ class ApiSession
                 .collection("accounts")
                 .where("email", "==", email)
                 .get()
-                .then { docList ->
+                .then({ docList ->
 
                     if (!docList.empty)
                     {
-                        response.status(200).send(docList.docs[0].data().email)
+                        response.status(200).send(docList.docs[0].data().password)
                     }
                     else
                     {
                         response.status(404).send()
                     }
-                }
+                })
         }
         else
         {

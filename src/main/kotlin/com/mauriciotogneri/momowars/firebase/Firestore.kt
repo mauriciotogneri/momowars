@@ -2,7 +2,7 @@ package com.mauriciotogneri.momowars.firebase
 
 external class Firestore
 {
-    val body: dynamic
+    fun doc(documentPath: String): DocumentReference
 
-    fun query(name: String): String
+    fun collection(collectionPath: String): CollectionReference
 }
