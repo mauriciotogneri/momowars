@@ -1,5 +1,6 @@
 (function (_, Kotlin) {
   'use strict';
+  var Unit = Kotlin.kotlin.Unit;
   function main$lambda(request, response) {
     return response.status(501).send();
   }
@@ -41,15 +42,15 @@
     var app = express();
     var api = new Api();
     app.post('/v1/session', Kotlin.getCallableRef('login', function ($receiver, request, response) {
-      return $receiver.login_wn2jw4$(request, response);
+      return $receiver.login_phqgcc$(request, response), Unit;
     }.bind(null, api.session)));
     app.get('/v1/account', Kotlin.getCallableRef('getAccount', function ($receiver, request, response) {
-      return $receiver.getAccount_wn2jw4$(request, response);
+      return $receiver.getAccount_phqgcc$(request, response), Unit;
     }.bind(null, api.account)));
     app.post('/v1/account', main$lambda);
     app.patch('/v1/account', main$lambda_0);
     app.get('/v1/games/:gameId', Kotlin.getCallableRef('getGame', function ($receiver, request, response) {
-      return $receiver.getGame_wn2jw4$(request, response);
+      return $receiver.getGame_phqgcc$(request, response), Unit;
     }.bind(null, api.game)));
     app.patch('/v1/games/:gameId', main$lambda_1);
     app.post('/v1/games', main$lambda_2);
@@ -76,7 +77,7 @@
   };
   function ApiAccount() {
   }
-  ApiAccount.prototype.getAccount_wn2jw4$ = function (request, response) {
+  ApiAccount.prototype.getAccount_phqgcc$ = function (request, response) {
     response.status(200).send('GET ACCOUNT');
   };
   ApiAccount.$metadata$ = {
@@ -86,8 +87,8 @@
   };
   function ApiGame() {
   }
-  ApiGame.prototype.getGame_wn2jw4$ = function (request, response) {
-    response.status(200).send('GET GAME');
+  ApiGame.prototype.getGame_phqgcc$ = function (request, response) {
+    response.status(200).send('GET GAME 2');
   };
   ApiGame.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -96,7 +97,7 @@
   };
   function ApiSession() {
   }
-  ApiSession.prototype.login_wn2jw4$ = function (request, response) {
+  ApiSession.prototype.login_phqgcc$ = function (request, response) {
     response.status(200).send('LOGIN');
   };
   ApiSession.$metadata$ = {
@@ -105,7 +106,10 @@
     interfaces: []
   };
   _.main_kand9s$ = main;
-  var package$api = _.api || (_.api = {});
+  var package$com = _.com || (_.com = {});
+  var package$mauriciotogneri = package$com.mauriciotogneri || (package$com.mauriciotogneri = {});
+  var package$momowars = package$mauriciotogneri.momowars || (package$mauriciotogneri.momowars = {});
+  var package$api = package$momowars.api || (package$momowars.api = {});
   package$api.Api = Api;
   package$api.ApiAccount = ApiAccount;
   package$api.ApiGame = ApiGame;
