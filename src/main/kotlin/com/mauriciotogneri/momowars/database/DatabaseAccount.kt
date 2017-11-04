@@ -1,17 +1,18 @@
 package com.mauriciotogneri.momowars.database
 
+import com.mauriciotogneri.momowars.documents.DocumentAccount
 import com.mauriciotogneri.momowars.firebase.CollectionReference
-import com.mauriciotogneri.momowars.firebase.DocumentSnapshot
+import com.mauriciotogneri.momowars.firebase.QuerySnapshot
 import kotlin.js.Promise
 
-class DatabaseAccount
+object DatabaseAccount
 {
-    fun bySessionToken(token: String): Promise<DocumentSnapshot>
+    fun bySessionToken(token: String): Promise<DocumentAccount>
     {
         return getAccount(root().where("session", "==", token).get())
     }
 
-    fun byEmail(email: String): Promise<DocumentSnapshot>
+    fun byEmail(email: String): Promise<DocumentAccount>
     {
         return getAccount(root().where("email", "==", email).get())
     }
@@ -23,7 +24,7 @@ class DatabaseAccount
         return Promise.all()
     }*/
 
-    private fun getAccount(queryPromise: Promise<dynamic>): Promise<DocumentSnapshot>
+    private fun getAccount(queryPromise: Promise<QuerySnapshot>): Promise<DocumentAccount>
     {
         return Promise { resolve, reject ->
 
@@ -31,8 +32,7 @@ class DatabaseAccount
 
                 if (!docList.empty)
                 {
-                    //resolve(new document . account (docList.docs[0]))
-                    resolve(docList.docs[0])
+                    resolve(DocumentAccount(docList.docs[0]))
                 }
                 else
                 {
