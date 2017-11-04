@@ -1,8 +1,9 @@
+package com.mauriciotogneri.momowars
+
 import com.mauriciotogneri.momowars.api.Api
 import com.mauriciotogneri.momowars.database.Database
-
-external fun require(module: String): dynamic
-external val exports: dynamic
+import com.mauriciotogneri.momowars.node.exports
+import com.mauriciotogneri.momowars.node.require
 
 fun main(args: Array<String>)
 {
@@ -10,7 +11,7 @@ fun main(args: Array<String>)
     val admin = require("firebase-admin")
     admin.initializeApp(functions.config().firebase)
 
-    Database.firestore = admin.firestore()
+    Database.initialize(admin)
 
     val express = require("express")
     val app = express()

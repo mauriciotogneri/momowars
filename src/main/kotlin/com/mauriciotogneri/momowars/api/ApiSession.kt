@@ -21,7 +21,7 @@ class ApiSession
 
                     if (!docList.empty)
                     {
-                        response.status(200).send(docList.docs[0].data().password)
+                        response.status(200).send("PASSWORD: " + docList.docs[0].data().password)
                     }
                     else
                     {
