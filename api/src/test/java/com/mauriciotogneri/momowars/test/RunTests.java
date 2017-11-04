@@ -16,5 +16,5 @@ import cucumber.api.junit.Cucumber;
 )
 public class RunTests
 {
-    static final String PATH = "momowars-api/src/test/resources/com/mauriciotogneri/momowars/test/";
+    static final String PATH = "api/src/test/resources/com/mauriciotogneri/momowars/test/";
 }
