@@ -12,9 +12,9 @@ object DatabasePlayer
         val snapshot = gameRef.collection("players").get().await()
 
         return snapshot.docs.map {
-            val accountRef = it.data().account as DocumentReference
-
-            DocumentPlayer(it, DocumentAccount(accountRef.get().await()))
+            DocumentPlayer(it, documentAccount(it.data().account))
         }
     }
+
+    private suspend fun documentAccount(ref: DocumentReference): DocumentAccount = DocumentAccount(ref.get().await())
 }

@@ -28,6 +28,7 @@ class ApiGame
                 if (gameRef != null)
                 {
                     val documentGame = DatabaseGame.byRef(gameRef)
+
                     val documentsPlayer = DatabasePlayer.byGameRef(gameRef)
 
                     response

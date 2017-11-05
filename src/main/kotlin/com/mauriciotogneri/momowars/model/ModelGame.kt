@@ -15,7 +15,7 @@ class ModelGame(private val documentGame: DocumentGame, private val documentsPla
                 Pair("map", documentGame.map),
                 Pair("resources", 0), // TODO
                 Pair("players", documentsPlayer.map { ModelPlayer(it).toJson() }),
-                Pair("cells", "[]") // TODO
+                Pair("cells", arrayOf<String>()) // TODO
         )
     }
 

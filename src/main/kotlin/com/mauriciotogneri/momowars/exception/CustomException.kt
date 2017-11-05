@@ -22,7 +22,7 @@ open class CustomException : Exception()
             }
             catch (exception: ForbiddenException)
             {
-                response.status(404).send()
+                response.status(403).send()
             }
             catch (exception: NotFoundException)
             {
@@ -34,7 +34,7 @@ open class CustomException : Exception()
             }
             catch (exception: Throwable)
             {
-                response.status(500).send()
+                response.status(500).send(exception.toString())
             }
         }
     }
