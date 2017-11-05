@@ -3,13 +3,22 @@ package com.mauriciotogneri.momowars.database
 import com.mauriciotogneri.momowars.documents.DocumentAccount
 import com.mauriciotogneri.momowars.firebase.CollectionReference
 import com.mauriciotogneri.momowars.firebase.QuerySnapshot
+import com.mauriciotogneri.momowars.utils.await
 import kotlin.js.Promise
 
 object DatabaseAccount
 {
-    fun bySessionToken(token: String): Promise<DocumentAccount>
+    /*fun bySessionToken2(token: String): Promise<DocumentAccount>
     {
         return getAccount(root().where("session", "==", token).get())
+    }*/
+
+    suspend fun bySessionToken(token: String): DocumentAccount
+    {
+        return DocumentAccount(root()
+                .where("session", "==", token)
+                .get()
+                .await().docs[0])
     }
 
     fun byEmail(email: String): Promise<DocumentAccount>

@@ -4,5 +4,7 @@ external class Request
 {
     val body: dynamic
 
+    fun get(name: String): String
+
     fun query(name: String): String
 }
