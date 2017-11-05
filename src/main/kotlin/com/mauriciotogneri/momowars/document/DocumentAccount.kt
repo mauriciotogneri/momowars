@@ -1,19 +1,16 @@
-package com.mauriciotogneri.momowars.documents
+package com.mauriciotogneri.momowars.document
 
 import com.mauriciotogneri.momowars.firebase.DocumentReference
 import com.mauriciotogneri.momowars.firebase.DocumentSnapshot
 import com.mauriciotogneri.momowars.utils.await
 import kotlin.js.Json
 
-class DocumentAccount(document: DocumentSnapshot)
+class DocumentAccount(private val doc: DocumentSnapshot)
 {
-    private val doc = document
-    private val data = doc.data()
-
-    val email: String = data.email
-    val nickname: String = data.nickname
-    val password: String = data.password
-    val games: Array<DocumentReference> = data.games
+    val email: String = doc.data().email
+    val nickname: String = doc.data().nickname
+    val password: String = doc.data().password
+    val games: Array<DocumentReference> = doc.data().games
 
     fun hasPassword(text: String): Boolean
     {

@@ -1,6 +1,6 @@
 package com.mauriciotogneri.momowars.database
 
-import com.mauriciotogneri.momowars.documents.DocumentAccount
+import com.mauriciotogneri.momowars.document.DocumentAccount
 import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.exception.NotFoundException
 import com.mauriciotogneri.momowars.exception.UnauthorizedException

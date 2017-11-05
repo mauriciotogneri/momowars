@@ -5,6 +5,7 @@ import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.express.Parameter
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
+import com.mauriciotogneri.momowars.model.ModelAccount
 import com.mauriciotogneri.momowars.utils.launch
 
 class ApiAccount
@@ -18,7 +19,7 @@ class ApiAccount
 
                 val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
-                response.status(200).send(documentAccount.nickname)
+                response.status(200).send(ModelAccount(documentAccount).toJson())
             }
             catch (exception: Throwable)
             {
