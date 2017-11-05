@@ -56,7 +56,7 @@ public class BaseEndPoint extends EndPoint
         {
             try
             {
-                logger = new Logger("logs");
+                logger = new Logger("api/logs");
             }
             catch (Exception e)
             {

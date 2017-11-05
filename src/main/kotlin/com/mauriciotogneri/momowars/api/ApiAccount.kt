@@ -16,9 +16,7 @@ class ApiAccount
             {
                 val sessionToken = Parameter.string(request.get(Api.SESSION_TOKEN))
 
-                //val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
-
-                val documentAccount = DatabaseAccount.test(sessionToken)
+                val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
                 response.status(200).send(documentAccount.nickname)
             }

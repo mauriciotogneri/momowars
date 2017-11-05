@@ -12,17 +12,21 @@ open class CustomException : Exception()
             {
                 throw exception
             }
-            catch (exception: HttpException401)
+            catch (exception: BadRequestException)
+            {
+                response.status(400).send()
+            }
+            catch (exception: UnauthorizedException)
             {
                 response.status(401).send()
             }
-            catch (exception: HttpException404)
+            catch (exception: NotFoundException)
             {
                 response.status(404).send()
             }
-            catch (exception: HttpException405)
+            catch (exception: InternalServerError)
             {
-                response.status(405).send()
+                response.status(500).send()
             }
             catch (exception: Throwable)
             {
@@ -32,8 +36,10 @@ open class CustomException : Exception()
     }
 }
 
-class HttpException401 : CustomException()
+class BadRequestException : CustomException()
 
-class HttpException404 : CustomException()
+class UnauthorizedException : CustomException()
 
-class HttpException405 : CustomException()
+class NotFoundException : CustomException()
+
+class InternalServerError : CustomException()

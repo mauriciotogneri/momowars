@@ -37,8 +37,6 @@ fun launch(block: suspend () -> Unit)
 
         override fun resumeWithException(exception: Throwable)
         {
-            console.log("resumeWithException: " + exception.toString())
-
             throw exception
         }
     })

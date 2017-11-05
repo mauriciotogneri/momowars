@@ -2,7 +2,8 @@ package com.mauriciotogneri.momowars.documents
 
 import com.mauriciotogneri.momowars.firebase.DocumentReference
 import com.mauriciotogneri.momowars.firebase.DocumentSnapshot
-import kotlin.js.Promise
+import com.mauriciotogneri.momowars.utils.await
+import kotlin.js.Json
 
 class DocumentAccount(document: DocumentSnapshot)
 {
@@ -19,9 +20,9 @@ class DocumentAccount(document: DocumentSnapshot)
         return (password == text)
     }
 
-    fun update(value: dynamic): Promise<Nothing>
+    suspend fun update(value: Json)
     {
-        return doc.ref.update(value)
+        doc.ref.update(value).await()
     }
 
     fun gameRef(gameId: String): DocumentReference?
