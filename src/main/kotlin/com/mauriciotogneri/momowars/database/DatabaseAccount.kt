@@ -39,6 +39,8 @@ object DatabaseAccount
         accountRefs.map { ref -> ref.get }
 
         return Promise.all()
+
+        return Promise.all(accountRefs.map(ref => ref.get()))
     }*/
 
     private fun root(): CollectionReference

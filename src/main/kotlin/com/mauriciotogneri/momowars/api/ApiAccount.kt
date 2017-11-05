@@ -19,7 +19,9 @@ class ApiAccount
 
                 val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
-                response.status(200).send(ModelAccount(documentAccount).toJson())
+                response
+                        .status(200)
+                        .json(ModelAccount(documentAccount).toJson())
             }
             catch (exception: Throwable)
             {

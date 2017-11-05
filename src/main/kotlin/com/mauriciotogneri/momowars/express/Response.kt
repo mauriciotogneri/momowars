@@ -6,7 +6,9 @@ external class Response
 
     fun set(header: String, value: String): Response
 
-    fun send(value: dynamic): Response
+    fun send(value: String): Response
+
+    fun json(value: dynamic): Response
 
     fun send(): Nothing
 }

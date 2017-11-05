@@ -20,6 +20,10 @@ open class CustomException : Exception()
             {
                 response.status(401).send()
             }
+            catch (exception: ForbiddenException)
+            {
+                response.status(404).send()
+            }
             catch (exception: NotFoundException)
             {
                 response.status(404).send()
@@ -36,10 +40,17 @@ open class CustomException : Exception()
     }
 }
 
+// 400
 class BadRequestException : CustomException()
 
+// 401
 class UnauthorizedException : CustomException()
 
+// 403
+class ForbiddenException : CustomException()
+
+// 404
 class NotFoundException : CustomException()
 
+// 500
 class InternalServerError : CustomException()

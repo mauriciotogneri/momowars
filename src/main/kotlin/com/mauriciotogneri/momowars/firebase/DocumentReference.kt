@@ -7,5 +7,9 @@ external class DocumentReference
 {
     val id: String
 
+    fun get(): Promise<DocumentSnapshot>
+
     fun update(value: Json): Promise<Nothing>
+
+    fun collection(collectionPath: String): CollectionReference
 }
