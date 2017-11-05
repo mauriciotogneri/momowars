@@ -1,13 +1,8 @@
 package com.mauriciotogneri.momowars.api
 
-import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.express.Parameter
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
-import com.mauriciotogneri.momowars.utils.Hash
-import kotlin.js.Date
-import kotlin.js.Math
-import kotlin.js.json
 
 class ApiSession
 {
@@ -18,7 +13,7 @@ class ApiSession
 
         if (!email.isEmpty() && !password.isEmpty())
         {
-            DatabaseAccount
+            /*DatabaseAccount
                     .byEmail(email)
                     .then({ documentAccount ->
 
@@ -42,7 +37,7 @@ class ApiSession
                     })
                     .catch({
                         response.status(404).send()
-                    })
+                    })*/
         }
         else
         {

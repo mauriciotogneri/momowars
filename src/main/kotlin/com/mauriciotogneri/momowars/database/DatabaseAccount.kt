@@ -1,29 +1,61 @@
 package com.mauriciotogneri.momowars.database
 
 import com.mauriciotogneri.momowars.documents.DocumentAccount
+import com.mauriciotogneri.momowars.exception.HttpException404
 import com.mauriciotogneri.momowars.firebase.CollectionReference
-import com.mauriciotogneri.momowars.firebase.QuerySnapshot
+import com.mauriciotogneri.momowars.firebase.Query
 import com.mauriciotogneri.momowars.utils.await
-import kotlin.js.Promise
+import kotlin.coroutines.experimental.suspendCoroutine
 
 object DatabaseAccount
 {
-    /*fun bySessionToken2(token: String): Promise<DocumentAccount>
-    {
-        return getAccount(root().where("session", "==", token).get())
-    }*/
-
     suspend fun bySessionToken(token: String): DocumentAccount
     {
-        return DocumentAccount(root()
-                .where("session", "==", token)
-                .get()
-                .await().docs[0])
+        return getAccount(root().where("session", "==", token))
     }
 
-    fun byEmail(email: String): Promise<DocumentAccount>
+    suspend fun byEmail(email: String): DocumentAccount
     {
-        return getAccount(root().where("email", "==", email).get())
+        return getAccount(root().where("email", "==", email))
+    }
+
+    suspend fun test(email: String): DocumentAccount =
+            suspendCoroutine { cont ->
+
+                console.log("E0")
+
+                DatabaseAccount.root()
+                        .where("email", "==", email)
+                        .get()
+                        .then({ docs ->
+
+                            if (!docs.empty)
+                            {
+                                cont.resume(DocumentAccount(docs.docs[0]))
+                            }
+                            else
+                            {
+                                console.log("E1: throwing 404")
+                                throw HttpException404()
+                            }
+                        })
+                        .catch({ exception ->
+                            cont.resumeWithException(exception)
+                        })
+            }
+
+    private suspend fun getAccount(query: Query): DocumentAccount
+    {
+        val snapshot = query.get().await()
+
+        if (!snapshot.empty)
+        {
+            return DocumentAccount(snapshot.docs[0])
+        }
+        else
+        {
+            throw Throwable()
+        }
     }
 
     /*fun listByRef(accountRefs: List<dynamic>): Promise<String>
@@ -32,24 +64,6 @@ object DatabaseAccount
 
         return Promise.all()
     }*/
-
-    private fun getAccount(queryPromise: Promise<QuerySnapshot>): Promise<DocumentAccount>
-    {
-        return Promise { resolve, reject ->
-
-            queryPromise.then({ docList ->
-
-                if (!docList.empty)
-                {
-                    resolve(DocumentAccount(docList.docs[0]))
-                }
-                else
-                {
-                    reject(Throwable())
-                }
-            })
-        }
-    }
 
     private fun root(): CollectionReference
     {

@@ -24,6 +24,10 @@ fun main(args: Array<String>)
 
     app.get("/v1/account", Api.account::getAccount)
 
+    /*app.get("/v1/account", { request: Request, response: Response ->
+        Api.process(request, response, Api.account::getAccount)
+    })*/
+
     app.post("/v1/account", { _, response ->
         // TODO: create account
         response.status(501).send()
