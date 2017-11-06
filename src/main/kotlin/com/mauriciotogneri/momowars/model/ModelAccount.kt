@@ -11,7 +11,7 @@ class ModelAccount(private val documentAccount: DocumentAccount)
         return json(
                 Pair("email", documentAccount.email),
                 Pair("nickname", documentAccount.nickname),
-                Pair("games", documentAccount.games.map { game -> game.id })
+                Pair("games", documentAccount.games.map { it.id })
         )
     }
 }
