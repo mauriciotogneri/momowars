@@ -46,4 +46,76 @@ class ApiGame
             }
         }
     }
+
+    fun endTurn(request: Request, response: Response)
+    {
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
+
+    fun createGame(request: Request, response: Response)
+    {
+        // map_id
+        // max_players
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
+
+    fun getOpenGames(request: Request, response: Response)
+    {
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
+
+    fun joinGame(request: Request, response: Response)
+    {
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
+
+    fun leaveGame(request: Request, response: Response)
+    {
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
 }

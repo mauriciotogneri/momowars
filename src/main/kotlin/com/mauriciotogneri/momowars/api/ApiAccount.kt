@@ -29,4 +29,32 @@ class ApiAccount
             }
         }
     }
+
+    fun createAccount(request: Request, response: Response)
+    {
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
+
+    fun updateAccount(request: Request, response: Response)
+    {
+        launch {
+            try
+            {
+                response.status(501).send()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
 }

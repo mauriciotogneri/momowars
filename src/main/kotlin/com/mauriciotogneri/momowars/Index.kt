@@ -24,76 +24,35 @@ fun main(args: Array<String>)
 
     app.get("/v1/account", Api.account::getAccount)
 
-    /*app.get("/v1/account", { request: Request, response: Response ->
-        Api.process(request, response, Api.account::getAccount)
-    })*/
+    app.post("/v1/account", Api.account::createAccount)
 
-    app.post("/v1/account", { _, response ->
-        // TODO: create account
-        response.status(501).send()
-    })
-
-    app.patch("/v1/account", { _, response ->
-        // TODO: update account
-        response.status(501).send()
-    })
+    app.patch("/v1/account", Api.account::updateAccount)
 
     // ====================================== GAMES =========================================
 
     app.get("/v1/games/:gameId", Api.game::getGame)
 
-    app.patch("/v1/games/:gameId", { _, response ->
-        // TODO: end turn
-        response.status(501).send()
-    })
+    app.patch("/v1/games/:gameId", Api.game::endTurn)
 
-    app.post("/v1/games", { _, response ->
-        // TODO: create game
-        // map_id
-        // max_players
-        response.status(501).send()
-    })
+    app.post("/v1/games", Api.game::createGame)
 
-    app.get("/v1/games", { _, response ->
-        // TODO: get open game
-        response.status(501).send()
-    })
+    app.get("/v1/games", Api.game::getOpenGames)
 
-    app.post("/v1/games/:gameId", { _, response ->
-        // TODO: join game
-        response.status(501).send()
-    })
+    app.post("/v1/games/:gameId", Api.game::joinGame)
 
-    app.delete("/v1/games/:gameId", { _, response ->
-        // TODO: leave game
-        response.status(501).send()
-    })
+    app.delete("/v1/games/:gameId", Api.game::leaveGame)
 
     // ====================================== UNITS =========================================
 
-    app.patch("/v1/games/:gameId/cells/:cellId/units/:unitId/move", { _, response ->
-        // TODO: move units
-        // { movement }
-        response.status(501).send()
-    })
+    app.patch("/v1/games/:gameId/cells/:cellId/units/:unitId/move", Api.unit::moveUnits)
 
-    app.put("/v1/games/:gameId/cells/:cellId/units", { _, response ->
-        // TODO: recruit units
-        // { type: string, quantity: int }
-        response.status(501).send()
-    })
+    app.put("/v1/games/:gameId/cells/:cellId/units", Api.unit::recruitUnits)
 
     // ======================================= MAPS =========================================
 
-    app.get("/v1/maps", { _, response ->
-        // TODO: get maps
-        response.status(501).send()
-    })
+    app.get("/v1/maps", Api.map::getMaps)
 
-    app.get("/v1/maps/:mapId", { _, response ->
-        // TODO: get map
-        response.status(501).send()
-    })
+    app.get("/v1/maps/:mapId", Api.map::getMap)
 
     // ======================================================================================
 
