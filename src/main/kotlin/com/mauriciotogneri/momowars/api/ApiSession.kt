@@ -15,7 +15,7 @@ import kotlin.js.json
 
 class ApiSession
 {
-    fun login(request: Request, response: Response)
+    fun createSession(request: Request, response: Response)
     {
         launch {
             try
@@ -29,10 +29,11 @@ class ApiSession
 
                     if (documentAccount.hasPassword(Hash.sha512(password)))
                     {
-                        val seed = Math.random().toString().substring(2) + Date().getTime().toString()
-                        val sessionId = Hash.sha512(seed)
+                        val sessionId = newSessionId()
 
-                        val update = json(Pair("session", sessionId))
+                        val update = json()
+                        update["session"] = sessionId
+
                         documentAccount.update(update)
 
                         response
@@ -55,5 +56,12 @@ class ApiSession
                 CustomException.process(exception, response)
             }
         }
+    }
+
+    fun newSessionId(): String
+    {
+        val seed = Math.random().toString().substring(2) + Date().getTime().toString()
+
+        return Hash.sha512(seed)
     }
 }

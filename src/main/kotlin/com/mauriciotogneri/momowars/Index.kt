@@ -18,7 +18,7 @@ fun main(args: Array<String>)
 
     // =================================== SESSION ==========================================
 
-    app.post("/v1/session", Api.session::login)
+    app.post("/v1/session", Api.session::createSession)
 
     // ==================================== ACCOUNT =========================================
 

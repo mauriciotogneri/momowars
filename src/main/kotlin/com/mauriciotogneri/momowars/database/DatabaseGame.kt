@@ -8,8 +8,10 @@ object DatabaseGame
 {
     suspend fun byRef(reference: DocumentReference): DocumentGame
     {
+        val documentsPlayer = DatabasePlayer.byGameRef(reference)
+
         val snapshot = reference.get().await()
 
-        return DocumentGame(snapshot)
+        return DocumentGame(snapshot, documentsPlayer)
     }
 }

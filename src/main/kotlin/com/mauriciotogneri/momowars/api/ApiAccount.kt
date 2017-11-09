@@ -5,7 +5,6 @@ import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.express.Parameter
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
-import com.mauriciotogneri.momowars.model.ModelAccount
 import com.mauriciotogneri.momowars.utils.launch
 
 class ApiAccount
@@ -21,7 +20,7 @@ class ApiAccount
 
                 response
                         .status(200)
-                        .json(ModelAccount(documentAccount).toJson())
+                        .json(documentAccount.toJson())
             }
             catch (exception: Throwable)
             {
@@ -35,7 +34,21 @@ class ApiAccount
         launch {
             try
             {
-                response.status(501).send()
+                val email = Parameter.string(request.body.email)
+                val password = Parameter.string(request.body.password)
+                val nickname = Parameter.string(request.body.nickname)
+
+                // TODO: check if email exists
+
+                val documentAccount = DatabaseAccount.createAccount(email, password, nickname)
+
+                console.log("DONE")
+                console.log(documentAccount.toJson())
+
+                response
+                        .status(200)
+                        .set(Api.SESSION_TOKEN, documentAccount.session)
+                        .json(documentAccount.toJson())
             }
             catch (exception: Throwable)
             {
