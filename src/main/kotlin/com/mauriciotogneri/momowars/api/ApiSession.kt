@@ -4,9 +4,9 @@ import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.exception.BadRequestException
 import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.exception.UnauthorizedException
-import com.mauriciotogneri.momowars.express.Parameter
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
+import com.mauriciotogneri.momowars.express.bodyParam
 import com.mauriciotogneri.momowars.utils.Hash
 import com.mauriciotogneri.momowars.utils.launch
 import kotlin.js.Date
@@ -20,8 +20,8 @@ class ApiSession
         launch {
             try
             {
-                val email = Parameter.string(request.body.email)
-                val password = Parameter.string(request.body.password)
+                val email = request.bodyParam("email")
+                val password = request.bodyParam("password")
 
                 if (!email.isEmpty() && !password.isEmpty())
                 {

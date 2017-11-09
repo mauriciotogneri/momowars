@@ -28,6 +28,10 @@ open class CustomException : Exception()
             {
                 response.status(404).send()
             }
+            catch (exception: ConflictException)
+            {
+                response.status(409).send()
+            }
             catch (exception: InternalServerError)
             {
                 response.status(500).send()
@@ -51,6 +55,9 @@ class ForbiddenException : CustomException()
 
 // 404
 class NotFoundException : CustomException()
+
+// 409
+class ConflictException : CustomException()
 
 // 500
 class InternalServerError : CustomException()

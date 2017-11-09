@@ -35,6 +35,11 @@ object DatabaseAccount
         return getAccount(root().where("email", "==", email), NotFoundException())
     }
 
+    suspend fun exists(email: String): Boolean
+    {
+        return !root().where("email", "==", email).get().await().empty
+    }
+
     private suspend fun getAccount(query: Query, exception: CustomException): DocumentAccount
     {
         val snapshot = query.get().await()

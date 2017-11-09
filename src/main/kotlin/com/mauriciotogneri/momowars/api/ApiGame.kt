@@ -4,9 +4,9 @@ import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.database.DatabaseGame
 import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.exception.ForbiddenException
-import com.mauriciotogneri.momowars.express.Parameter
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
+import com.mauriciotogneri.momowars.express.headerParam
 import com.mauriciotogneri.momowars.utils.launch
 
 class ApiGame
@@ -16,25 +16,18 @@ class ApiGame
         launch {
             try
             {
-                val sessionToken = Parameter.string(request.get(Api.SESSION_TOKEN))
+                val sessionToken = request.headerParam(Api.SESSION_TOKEN)
                 val gameId = request.param("gameId")
 
                 val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
-                val gameRef = documentAccount.gameRef(gameId)
+                val gameRef = documentAccount.gameRef(gameId) ?: throw ForbiddenException()
 
-                if (gameRef != null)
-                {
-                    val documentGame = DatabaseGame.byRef(gameRef)
+                val documentGame = DatabaseGame.byRef(gameRef)
 
-                    response
-                            .status(200)
-                            .json(documentGame.toJson())
-                }
-                else
-                {
-                    throw ForbiddenException()
-                }
+                response
+                        .status(200)
+                        .json(documentGame.toJson())
             }
             catch (exception: Throwable)
             {

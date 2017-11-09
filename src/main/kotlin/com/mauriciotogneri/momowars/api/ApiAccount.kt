@@ -1,10 +1,12 @@
 package com.mauriciotogneri.momowars.api
 
 import com.mauriciotogneri.momowars.database.DatabaseAccount
+import com.mauriciotogneri.momowars.exception.ConflictException
 import com.mauriciotogneri.momowars.exception.CustomException
-import com.mauriciotogneri.momowars.express.Parameter
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
+import com.mauriciotogneri.momowars.express.bodyParam
+import com.mauriciotogneri.momowars.express.headerParam
 import com.mauriciotogneri.momowars.utils.launch
 
 class ApiAccount
@@ -14,7 +16,7 @@ class ApiAccount
         launch {
             try
             {
-                val sessionToken = Parameter.string(request.get(Api.SESSION_TOKEN))
+                val sessionToken = request.headerParam(Api.SESSION_TOKEN)
 
                 val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
@@ -34,21 +36,23 @@ class ApiAccount
         launch {
             try
             {
-                val email = Parameter.string(request.body.email)
-                val password = Parameter.string(request.body.password)
-                val nickname = Parameter.string(request.body.nickname)
+                val email = request.bodyParam("email")
+                val password = request.bodyParam("password")
+                val nickname = request.bodyParam("nickname")
 
-                // TODO: check if email exists
+                if (!DatabaseAccount.exists(email))
+                {
+                    val documentAccount = DatabaseAccount.createAccount(email, password, nickname)
 
-                val documentAccount = DatabaseAccount.createAccount(email, password, nickname)
-
-                console.log("DONE")
-                console.log(documentAccount.toJson())
-
-                response
-                        .status(200)
-                        .set(Api.SESSION_TOKEN, documentAccount.session)
-                        .json(documentAccount.toJson())
+                    response
+                            .status(200)
+                            .set(Api.SESSION_TOKEN, documentAccount.session)
+                            .json(documentAccount.toJson())
+                }
+                else
+                {
+                    throw ConflictException()
+                }
             }
             catch (exception: Throwable)
             {

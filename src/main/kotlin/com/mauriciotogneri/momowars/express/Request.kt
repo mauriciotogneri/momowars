@@ -10,3 +10,9 @@ external class Request
 
     fun query(name: String): String
 }
+
+fun Request.bodyParam(name: String): String = cleanString(body[name])
+
+fun Request.headerParam(name: String): String = cleanString(get(name))
+
+fun cleanString(value: dynamic): String = if (value == null) "" else "$value"
