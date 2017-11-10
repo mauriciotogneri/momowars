@@ -25,9 +25,7 @@ class ApiGame
 
                 val documentGame = DatabaseGame.byRef(gameRef)
 
-                response
-                        .status(200)
-                        .json(documentGame.toJson())
+                response.status(200).json(documentGame.toJson())
             }
             catch (exception: Throwable)
             {
@@ -71,7 +69,10 @@ class ApiGame
         launch {
             try
             {
-                response.status(501).send()
+                val games = DatabaseGame.getOpenGames()
+                val list = games.map { it.basicJson() }
+
+                response.status(200).json(list)
             }
             catch (exception: Throwable)
             {
