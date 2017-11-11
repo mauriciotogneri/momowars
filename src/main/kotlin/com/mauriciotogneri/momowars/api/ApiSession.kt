@@ -6,7 +6,6 @@ import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.express.bodyParam
 import com.mauriciotogneri.momowars.utils.Hash
-import com.mauriciotogneri.momowars.utils.launch
 import kotlin.js.Date
 import kotlin.js.Math
 import kotlin.js.json
@@ -15,37 +14,31 @@ class ApiSession : BaseApi()
 {
     fun createSession(request: Request, response: Response)
     {
-        launch {
-            try
+        process(response)
+        {
+            val email = request.bodyParam("email")
+            val password = request.bodyParam("password")
+
+            checkNotEmpty(email, password)
+
+            val documentAccount = DatabaseAccount.byEmail(email)
+
+            if (!documentAccount.hasPassword(Hash.sha512(password)))
             {
-                val email = request.bodyParam("email")
-                val password = request.bodyParam("password")
-
-                checkNotEmpty(email, password)
-
-                val documentAccount = DatabaseAccount.byEmail(email)
-
-                if (!documentAccount.hasPassword(Hash.sha512(password)))
-                {
-                    throw UnauthorizedException()
-                }
-
-                val sessionId = newSessionId()
-
-                val update = json()
-                update["session"] = sessionId
-
-                documentAccount.update(update)
-
-                response
-                        .status(200)
-                        .set(Api.SESSION_TOKEN, sessionId)
-                        .send()
+                throw UnauthorizedException()
             }
-            catch (exception: Throwable)
-            {
-                processException(exception, response)
-            }
+
+            val sessionId = newSessionId()
+
+            val update = json()
+            update["session"] = sessionId
+
+            documentAccount.update(update)
+
+            response
+                    .status(200)
+                    .set(Api.SESSION_TOKEN, sessionId)
+                    .send()
         }
     }
 

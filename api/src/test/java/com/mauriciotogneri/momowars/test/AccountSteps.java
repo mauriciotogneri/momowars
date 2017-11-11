@@ -31,6 +31,8 @@ public class AccountSteps extends BaseSteps
         Assert.assertEquals("Momo", ACCOUNT.nickname);
     }
 
+    // ========================================================================================== \\
+
     @When("^I create a new account with missing data$")
     public void createANewAccountWithMissingData() throws Exception
     {

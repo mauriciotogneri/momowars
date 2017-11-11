@@ -3,10 +3,25 @@ package com.mauriciotogneri.momowars.api
 import com.mauriciotogneri.momowars.exception.BadRequestException
 import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.express.Response
+import com.mauriciotogneri.momowars.utils.launch
 
 open class BaseApi
 {
-    fun checkNotEmpty(vararg list: String)
+    protected fun process(response: Response, block: suspend () -> Unit)
+    {
+        launch {
+            try
+            {
+                block.invoke()
+            }
+            catch (exception: Throwable)
+            {
+                CustomException.process(exception, response)
+            }
+        }
+    }
+
+    protected fun checkNotEmpty(vararg list: String)
     {
         for (element in list)
         {
@@ -16,6 +31,4 @@ open class BaseApi
             }
         }
     }
-
-    fun processException(exception: Throwable, response: Response) = CustomException.process(exception, response)
 }

@@ -37,4 +37,16 @@ public class GameSteps extends BaseSteps
             Assert.assertNotEquals(null, game);
         }
     }
+
+    // ========================================================================================== \\
+
+    @When("^When I get the open games$")
+    public void getTheOpenGames() throws Exception
+    {
+        ApiResult result = getOpenGamesEndPoint.execute(SessionSteps.SESSION_TOKEN);
+        checkHttpStatus(200, result);
+
+        Game[] games = json(result, Game[].class);
+        Assert.assertNotEquals(null, games);
+    }
 }
