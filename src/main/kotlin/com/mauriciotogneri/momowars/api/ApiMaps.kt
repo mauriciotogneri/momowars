@@ -1,11 +1,10 @@
 package com.mauriciotogneri.momowars.api
 
-import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.utils.launch
 
-class ApiMaps
+class ApiMaps: BaseApi()
 {
     fun getMaps(request: Request, response: Response)
     {
@@ -16,7 +15,7 @@ class ApiMaps
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -30,7 +29,7 @@ class ApiMaps
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }

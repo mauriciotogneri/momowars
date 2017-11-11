@@ -1,5 +1,10 @@
 Feature: Account API
 
-    Scenario: account operations
+	Scenario: create account
+        When I create a new account with missing data
+        When I create a new account with an existing email
+        When I create a new account with valid data
+
+    Scenario: get account
         When I get the account with an invalid session
         When I get the account with a valid session

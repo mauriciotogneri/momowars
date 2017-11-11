@@ -1,4 +1,4 @@
-package com.mauriciotogneri.momowars.model.session;
+package com.mauriciotogneri.momowars.model.headers;
 
 import com.mauriciotogneri.jsonschema.annotations.Name;
 

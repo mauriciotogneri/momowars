@@ -1,8 +1,6 @@
 package com.mauriciotogneri.momowars.api
 
 import com.mauriciotogneri.momowars.database.DatabaseAccount
-import com.mauriciotogneri.momowars.exception.BadRequestException
-import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.exception.UnauthorizedException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
@@ -13,7 +11,7 @@ import kotlin.js.Date
 import kotlin.js.Math
 import kotlin.js.json
 
-class ApiSession
+class ApiSession : BaseApi()
 {
     fun createSession(request: Request, response: Response)
     {
@@ -23,37 +21,30 @@ class ApiSession
                 val email = request.bodyParam("email")
                 val password = request.bodyParam("password")
 
-                if (!email.isEmpty() && !password.isEmpty())
+                checkNotEmpty(email, password)
+
+                val documentAccount = DatabaseAccount.byEmail(email)
+
+                if (!documentAccount.hasPassword(Hash.sha512(password)))
                 {
-                    val documentAccount = DatabaseAccount.byEmail(email)
-
-                    if (documentAccount.hasPassword(Hash.sha512(password)))
-                    {
-                        val sessionId = newSessionId()
-
-                        val update = json()
-                        update["session"] = sessionId
-
-                        documentAccount.update(update)
-
-                        response
-                                .status(200)
-                                .set(Api.SESSION_TOKEN, sessionId)
-                                .send()
-                    }
-                    else
-                    {
-                        throw UnauthorizedException()
-                    }
+                    throw UnauthorizedException()
                 }
-                else
-                {
-                    throw BadRequestException()
-                }
+
+                val sessionId = newSessionId()
+
+                val update = json()
+                update["session"] = sessionId
+
+                documentAccount.update(update)
+
+                response
+                        .status(200)
+                        .set(Api.SESSION_TOKEN, sessionId)
+                        .send()
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }

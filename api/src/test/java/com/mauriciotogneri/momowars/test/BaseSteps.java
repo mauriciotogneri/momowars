@@ -3,6 +3,7 @@ package com.mauriciotogneri.momowars.test;
 import com.mauriciotogneri.apivalidator.api.ApiResult;
 import com.mauriciotogneri.javautils.Json;
 import com.mauriciotogneri.momowars.model.accounts.Account;
+import com.mauriciotogneri.momowars.validation.endpoints.accounts.CreateAccountEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.accounts.GetAccountEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.games.GetGameEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.session.LoginEndPoint;
@@ -16,6 +17,7 @@ public class BaseSteps
 
     protected final LoginEndPoint loginEndPoint = new LoginEndPoint();
     protected final GetAccountEndPoint getAccountEndPoint = new GetAccountEndPoint();
+    protected final CreateAccountEndPoint createAccountEndPoint = new CreateAccountEndPoint();
     protected final GetGameEndPoint getGameEndPoint = new GetGameEndPoint();
 
     @SuppressWarnings("unchecked")

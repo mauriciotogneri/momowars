@@ -2,14 +2,13 @@ package com.mauriciotogneri.momowars.api
 
 import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.database.DatabaseGame
-import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.exception.ForbiddenException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.express.headerParam
 import com.mauriciotogneri.momowars.utils.launch
 
-class ApiGame
+class ApiGame: BaseApi()
 {
     fun getGame(request: Request, response: Response)
     {
@@ -29,7 +28,7 @@ class ApiGame
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -43,7 +42,7 @@ class ApiGame
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -59,7 +58,7 @@ class ApiGame
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -76,7 +75,7 @@ class ApiGame
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -90,7 +89,7 @@ class ApiGame
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -104,7 +103,7 @@ class ApiGame
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }

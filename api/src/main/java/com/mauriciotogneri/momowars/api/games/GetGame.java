@@ -2,7 +2,7 @@ package com.mauriciotogneri.momowars.api.games;
 
 import com.mauriciotogneri.momowars.api.games.GetGame.PathParameter;
 import com.mauriciotogneri.momowars.model.games.Game;
-import com.mauriciotogneri.momowars.model.session.SessionToken;
+import com.mauriciotogneri.momowars.model.headers.SessionToken;
 import com.mauriciotogneri.stewie.annotations.EndPoint;
 import com.mauriciotogneri.stewie.annotations.Parameters;
 import com.mauriciotogneri.stewie.annotations.Response;

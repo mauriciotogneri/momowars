@@ -1,11 +1,10 @@
 package com.mauriciotogneri.momowars.api
 
-import com.mauriciotogneri.momowars.exception.CustomException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.utils.launch
 
-class ApiUnits
+class ApiUnits: BaseApi()
 {
     fun moveUnits(request: Request, response: Response)
     {
@@ -17,7 +16,7 @@ class ApiUnits
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
@@ -32,7 +31,7 @@ class ApiUnits
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                processException(exception, response)
             }
         }
     }
