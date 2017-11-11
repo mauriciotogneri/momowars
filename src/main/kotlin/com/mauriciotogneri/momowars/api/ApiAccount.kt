@@ -15,6 +15,8 @@ class ApiAccount : BaseApi()
         {
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
 
+            checkNotEmpty(sessionToken)
+
             val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
             response
@@ -42,7 +44,7 @@ class ApiAccount : BaseApi()
 
             response
                     .status(200)
-                    .set(Api.SESSION_TOKEN, documentAccount.session)
+                    .set(Api.SESSION_TOKEN, documentAccount.session())
                     .json(documentAccount.toJson())
         }
     }

@@ -5,5 +5,7 @@ enum class GameStatus
     OPEN,
     PLAYING,
     CALCULATING,
-    FINISHED
+    FINISHED;
+
+    fun value() = toString().toLowerCase()
 }

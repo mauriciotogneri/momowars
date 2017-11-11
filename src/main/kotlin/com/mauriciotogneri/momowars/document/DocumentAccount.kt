@@ -8,16 +8,20 @@ import kotlin.js.json
 
 class DocumentAccount(private val doc: DocumentSnapshot)
 {
-    val email: String = doc.data().email
-    val nickname: String = doc.data().nickname
-    val password: String = doc.data().password
-    val session: String = doc.data().session
-    val games: Array<DocumentReference> = doc.data().games
+    private val email: String = doc.data().email
+    private val nickname: String = doc.data().nickname
+    private val password: String = doc.data().password
+    private val session: String = doc.data().session
+    private val games: Array<DocumentReference> = doc.data().games
 
     fun hasPassword(text: String): Boolean
     {
         return (password == text)
     }
+
+    fun session() = session
+
+    fun nickname() = nickname
 
     suspend fun update(value: Json)
     {

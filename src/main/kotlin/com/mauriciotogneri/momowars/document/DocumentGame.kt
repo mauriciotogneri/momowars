@@ -4,11 +4,11 @@ import com.mauriciotogneri.momowars.firebase.DocumentSnapshot
 import kotlin.js.Json
 import kotlin.js.json
 
-class DocumentGame(doc: DocumentSnapshot, private val documentsPlayer: List<DocumentPlayer> = listOf())
+class DocumentGame(doc: DocumentSnapshot, private val documentsPlayer: List<DocumentPlayer>)
 {
-    private val id = doc.id
-    private val status = doc.data().status
-    private val map = doc.data().map
+    private val id: String = doc.id
+    private val status: String = doc.data().status
+    private val map: String = doc.data().map
 
     fun toJson(): Json
     {
@@ -27,8 +27,9 @@ class DocumentGame(doc: DocumentSnapshot, private val documentsPlayer: List<Docu
     {
         val json = json()
         json["id"] = id
+        json["status"] = status
         json["map"] = map
-        json["players"] = documentsPlayer.size
+        json["players"] = documentsPlayer.map { it.toJson() }
         json["cells"] = arrayOf<String>()
 
         return json

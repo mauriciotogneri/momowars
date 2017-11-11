@@ -16,7 +16,7 @@ public class AccountSteps extends BaseSteps
     @When("^I get the account with an invalid session$")
     public void getAccountWithAnInvalidSession() throws Exception
     {
-        ApiResult result = getAccountEndPoint.execute("");
+        ApiResult result = getAccountEndPoint.execute("xxx");
         checkHttpStatus(401, result);
     }
 

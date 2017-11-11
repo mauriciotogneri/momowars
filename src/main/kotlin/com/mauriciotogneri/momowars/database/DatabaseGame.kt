@@ -22,7 +22,7 @@ object DatabaseGame
         return Database
                 .firestore
                 .collection("games")
-                .where("status", "==", GameStatus.OPEN.toString().toLowerCase())
+                .where("status", "==", GameStatus.OPEN.value())
                 .search()
                 .docs
                 .map { DocumentGame(it, DatabasePlayer.byGameRef(it.ref)) }

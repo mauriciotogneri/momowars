@@ -6,6 +6,7 @@ import com.mauriciotogneri.momowars.exception.ForbiddenException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.express.headerParam
+import com.mauriciotogneri.momowars.express.pathParam
 
 class ApiGame : BaseApi()
 {
@@ -14,7 +15,9 @@ class ApiGame : BaseApi()
         process(response)
         {
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
-            val gameId = request.param("gameId")
+            val gameId = request.pathParam("gameId")
+
+            checkNotEmpty(sessionToken, gameId)
 
             val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 

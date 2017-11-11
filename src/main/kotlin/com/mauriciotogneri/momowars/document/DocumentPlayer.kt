@@ -6,13 +6,13 @@ import kotlin.js.json
 
 class DocumentPlayer(doc: DocumentSnapshot, private val account: DocumentAccount)
 {
-    val color = doc.data().color
-    val status = doc.data().status
+    private val color: String = doc.data().color
+    private val status: String = doc.data().status
 
     fun toJson(): Json
     {
         val json = json()
-        json["nickname"] = account.nickname
+        json["nickname"] = account.nickname()
         json["color"] = color
         json["status"] = status
 

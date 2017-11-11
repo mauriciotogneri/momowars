@@ -14,7 +14,7 @@ public class GameSteps extends BaseSteps
     @When("^I get a game with an invalid session$")
     public void getAGameWithAnInvalidSession() throws Exception
     {
-        ApiResult result = getGameEndPoint.execute("", "xxx");
+        ApiResult result = getGameEndPoint.execute("xxx", "xxx");
         checkHttpStatus(401, result);
     }
 
@@ -40,7 +40,7 @@ public class GameSteps extends BaseSteps
 
     // ========================================================================================== \\
 
-    @When("^When I get the open games$")
+    @When("^I get the open games$")
     public void getTheOpenGames() throws Exception
     {
         ApiResult result = getOpenGamesEndPoint.execute(SessionSteps.SESSION_TOKEN);
