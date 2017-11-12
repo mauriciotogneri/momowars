@@ -7,8 +7,6 @@ class ApiUnits : BaseApi()
 {
     fun moveUnits(request: Request, response: Response)
     {
-        // { movement }
-
         process(response)
         {
             response.status(501).send()
@@ -17,8 +15,6 @@ class ApiUnits : BaseApi()
 
     fun recruitUnits(request: Request, response: Response)
     {
-        // { type: string, quantity: int }
-
         process(response)
         {
             response.status(501).send()
