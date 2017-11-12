@@ -7,5 +7,7 @@ enum class UnitType
     HUMVEE,
     LIGHT_TANK,
     HEAVY_TANK,
-    HELICOPTER
+    HELICOPTER;
+
+    fun value() = toString().toLowerCase()
 }

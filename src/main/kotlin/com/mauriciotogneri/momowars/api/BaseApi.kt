@@ -1,7 +1,7 @@
 package com.mauriciotogneri.momowars.api
 
 import com.mauriciotogneri.momowars.exception.BadRequestException
-import com.mauriciotogneri.momowars.exception.CustomException
+import com.mauriciotogneri.momowars.exception.HttpException
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.utils.launch
 
@@ -16,7 +16,7 @@ open class BaseApi
             }
             catch (exception: Throwable)
             {
-                CustomException.process(exception, response)
+                HttpException.process(exception, response)
             }
         }
     }

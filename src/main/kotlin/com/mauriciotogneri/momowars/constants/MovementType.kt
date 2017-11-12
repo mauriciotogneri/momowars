@@ -8,5 +8,7 @@ enum class MovementType
     UP_RIGHT,
     DOWN_RIGHT,
     DOWN,
-    DOWN_LEFT
+    DOWN_LEFT;
+
+    fun value() = toString().toLowerCase()
 }

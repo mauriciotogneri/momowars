@@ -14,18 +14,20 @@ class DocumentAccount(private val doc: DocumentSnapshot)
     private val session: String = doc.data().session
     private val games: Array<DocumentReference> = doc.data().games
 
-    fun hasPassword(text: String): Boolean
-    {
-        return (password == text)
-    }
+    fun id() = doc.id
 
     fun session() = session
 
     fun nickname() = nickname
 
-    suspend fun update(value: Json)
+    fun hasPassword(text: String): Boolean
     {
-        doc.ref.update(value).await()
+        return (password == text)
+    }
+
+    suspend fun update(json: Json)
+    {
+        doc.ref.update(json).await()
     }
 
     fun gameRef(gameId: String): DocumentReference?

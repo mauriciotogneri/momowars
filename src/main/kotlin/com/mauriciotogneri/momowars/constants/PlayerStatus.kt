@@ -6,5 +6,7 @@ enum class PlayerStatus
     WAITING,
     VICTORIOUS,
     DEFEATED,
-    SURRENDED
+    SURRENDED;
+
+    fun value() = toString().toLowerCase()
 }

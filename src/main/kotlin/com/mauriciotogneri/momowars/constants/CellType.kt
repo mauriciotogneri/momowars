@@ -10,5 +10,7 @@ enum class CellType
     DESERT,
     CONCRETE,
     WATER,
-    ICE
+    ICE;
+
+    fun value() = toString().toLowerCase()
 }

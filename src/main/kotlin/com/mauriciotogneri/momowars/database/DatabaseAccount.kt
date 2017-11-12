@@ -2,7 +2,7 @@ package com.mauriciotogneri.momowars.database
 
 import com.mauriciotogneri.momowars.api.Api
 import com.mauriciotogneri.momowars.document.DocumentAccount
-import com.mauriciotogneri.momowars.exception.CustomException
+import com.mauriciotogneri.momowars.exception.HttpException
 import com.mauriciotogneri.momowars.exception.NotFoundException
 import com.mauriciotogneri.momowars.exception.UnauthorizedException
 import com.mauriciotogneri.momowars.firebase.CollectionReference
@@ -40,7 +40,7 @@ object DatabaseAccount
         return !root().where("email", "==", email).get().await().empty
     }
 
-    private suspend fun getAccount(query: Query, exception: CustomException): DocumentAccount
+    private suspend fun getAccount(query: Query, exception: HttpException): DocumentAccount
     {
         val snapshot = query.get().await()
 

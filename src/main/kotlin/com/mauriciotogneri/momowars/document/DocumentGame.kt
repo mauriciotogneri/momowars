@@ -10,6 +10,13 @@ class DocumentGame(doc: DocumentSnapshot, private val documentsPlayer: List<Docu
     private val status: String = doc.data().status
     private val map: String = doc.data().map
 
+    fun status() = status
+
+    fun playerForAccount(documentAccount: DocumentAccount): DocumentPlayer?
+    {
+        return documentsPlayer.find { it.isOfAccount(documentAccount) }
+    }
+
     fun toJson(): Json
     {
         val json = json()
