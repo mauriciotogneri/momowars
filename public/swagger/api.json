@@ -14,13 +14,53 @@
       "name": "Games"
     },
     {
+      "name": "Maps"
+    },
+    {
       "name": "Sessions"
+    },
+    {
+      "name": "Units"
     }
   ],
   "schemes": [
     "https"
   ],
   "paths": {
+    "/v1/maps": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "summary": "GetMaps",
+        "description": "Returns the list of available maps",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/com.mauriciotogneri.momowars.model.games.Map"
+              }
+            },
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          }
+        }
+      }
+    },
     "/v1/account": {
       "patch": {
         "tags": [
@@ -126,7 +166,71 @@
         }
       }
     },
+    "/v1/games/{gameId}/cells/{cellId}/units": {
+      "patch": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "RecruitUnits",
+        "description": "Enqueues the command to recruit of the units",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/com.mauriciotogneri.momowars.api.units.RecruitUnits.DataParameter"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Parameters missing or invalid"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "404": {
+            "description": "Invalid gameId or cellId"
+          }
+        }
+      }
+    },
     "/v1/games": {
+      "post": {
+        "tags": [
+          "Games"
+        ],
+        "summary": "CreateGame",
+        "description": "Creates a new game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/com.mauriciotogneri.momowars.api.games.CreateGame.DataParameter"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Games"
@@ -161,6 +265,70 @@
       }
     },
     "/v1/games/{gameId}": {
+      "patch": {
+        "tags": [
+          "Games"
+        ],
+        "summary": "EndTurn",
+        "description": "Ends the turn of the player for the given game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "403": {
+            "description": "Not allowed to end the turn on the given game"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Games"
+        ],
+        "summary": "JoinGame",
+        "description": "Joins the given game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "409": {
+            "description": "The game is full"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Games"
@@ -198,6 +366,38 @@
             "description": "Not allowed to retrieve the game"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Games"
+        ],
+        "summary": "LeaveGame",
+        "description": "Leaves the given game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "403": {
+            "description": "Not allowed to leave the given game"
+          }
+        }
       }
     },
     "/v1/session": {
@@ -232,9 +432,99 @@
           }
         }
       }
+    },
+    "/v1/games/{gameId}/cells/{cellId}/units/{unitId}/move": {
+      "patch": {
+        "tags": [
+          "Units"
+        ],
+        "summary": "MoveUnits",
+        "description": "Enqueues the command to move the units",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/com.mauriciotogneri.momowars.api.units.MoveUnits.DataParameter"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Parameters missing or invalid"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "404": {
+            "description": "Invalid gameId, cellId or unitId"
+          }
+        }
+      }
+    },
+    "/v1/maps/{mapId}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "summary": "GetMap",
+        "description": "Returns a map by its id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mapId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/com.mauriciotogneri.momowars.model.games.Map"
+            },
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "com.mauriciotogneri.momowars.api.units.MoveUnits.DataParameter": {
+      "type": "object",
+      "properties": {
+        "movement": {
+          "type": "string",
+          "enum": [
+            "none",
+            "up_left",
+            "up",
+            "up_right",
+            "down_right",
+            "down",
+            "down_left"
+          ]
+        }
+      },
+      "required": [
+        "movement"
+      ]
+    },
     "com.mauriciotogneri.momowars.model.accounts.Account": {
       "type": "object",
       "properties": {
@@ -323,6 +613,22 @@
         "nickname"
       ]
     },
+    "com.mauriciotogneri.momowars.api.games.CreateGame.DataParameter": {
+      "type": "object",
+      "properties": {
+        "mapId": {
+          "type": "string"
+        },
+        "maxPlayers": {
+          "type": "integer",
+          "minimum": 2
+        }
+      },
+      "required": [
+        "mapId",
+        "maxPlayers"
+      ]
+    },
     "com.mauriciotogneri.momowars.model.games.Map": {
       "type": "object",
       "properties": {
@@ -362,6 +668,30 @@
         "nickname",
         "status",
         "color"
+      ]
+    },
+    "com.mauriciotogneri.momowars.api.units.RecruitUnits.DataParameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "squad",
+            "mortar",
+            "humvee",
+            "light_tank",
+            "heavy_tank",
+            "helicopter"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "type",
+        "quantity"
       ]
     },
     "com.mauriciotogneri.momowars.api.sessions.CreateSession.DataParameter": {

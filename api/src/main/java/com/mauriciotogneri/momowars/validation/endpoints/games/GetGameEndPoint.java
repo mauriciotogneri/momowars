@@ -16,12 +16,12 @@ public class GetGameEndPoint extends BaseEndPoint implements GetGame
 
     public ApiResult execute(String sessionToken, String gameId) throws Exception
     {
-        PathParameter pathParameter = new PathParameter();
-        pathParameter.gameId = gameId;
+        PathParameter path = new PathParameter();
+        path.gameId = gameId;
 
         ApiRequest.Builder builder = request();
         builder.header(HEADER_SESSION_TOKEN, sessionToken);
-        builder.path(new PathParameters(pathParameter), PATH_FORMAT);
+        builder.path(new PathParameters(path), PATH_FORMAT);
         builder.response(jsonResponse());
 
         return process(builder);

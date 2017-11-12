@@ -30,17 +30,17 @@ fun main(args: Array<String>)
 
     // ====================================== GAMES =========================================
 
+    app.get("/v1/games", Api.game::getOpenGames)
+
     app.get("/v1/games/:gameId", Api.game::getGame)
 
     app.patch("/v1/games/:gameId", Api.game::endTurn)
 
-    app.post("/v1/games", Api.game::createGame)
-
-    app.get("/v1/games", Api.game::getOpenGames)
-
     app.post("/v1/games/:gameId", Api.game::joinGame)
 
     app.delete("/v1/games/:gameId", Api.game::leaveGame)
+
+    app.post("/v1/games", Api.game::createGame)
 
     // ====================================== UNITS =========================================
 

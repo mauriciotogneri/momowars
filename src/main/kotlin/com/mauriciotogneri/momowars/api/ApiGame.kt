@@ -68,9 +68,6 @@ class ApiGame : BaseApi()
 
     fun createGame(request: Request, response: Response)
     {
-        // map_id
-        // max_players
-
         process(response)
         {
             response.status(501).send()
