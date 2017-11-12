@@ -1,8 +1,10 @@
 package com.mauriciotogneri.momowars.model.games;
 
+import com.mauriciotogneri.momowars.model.constants.GameStatus;
+
 public class Game
 {
-    public String status;
+    public GameStatus status;
 
     public Map map;
 

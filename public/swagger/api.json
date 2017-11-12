@@ -22,6 +22,37 @@
     ],
     "paths": {
         "/v1/account": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "CreateAccount",
+                "description": "Creates a user's account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/com.mauriciotogneri.momowars.api.accounts.CreateAccount.DataParameter"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/com.mauriciotogneri.momowars.model.accounts.Account"
+                        },
+                        "description": "Successful operation"
+                    }
+                }
+            },
             "get": {
                 "tags": [
                     "Accounts"
@@ -43,6 +74,37 @@
                     "200": {
                         "schema": {
                             "$ref": "#/definitions/com.mauriciotogneri.momowars.model.accounts.Account"
+                        },
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/v1/games": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "GetOpenGames",
+                "description": "Returns a list of all the open games",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Session-Token",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/com.mauriciotogneri.momowars.model.games.Game"
+                            }
                         },
                         "description": "Successful operation"
                     }
@@ -213,7 +275,14 @@
                     "type": "string"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "playing",
+                        "waiting",
+                        "victorious",
+                        "defeated",
+                        "surrended"
+                    ]
                 },
                 "color": {
                     "type": "string"
@@ -223,6 +292,26 @@
                 "nickname",
                 "status",
                 "color"
+            ]
+        },
+        "com.mauriciotogneri.momowars.api.accounts.CreateAccount.DataParameter": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "nickname": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "email",
+                "password",
+                "nickname"
             ]
         }
     }
