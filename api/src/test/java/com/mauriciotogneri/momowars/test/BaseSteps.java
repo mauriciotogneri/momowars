@@ -7,7 +7,7 @@ import com.mauriciotogneri.momowars.validation.endpoints.accounts.CreateAccountE
 import com.mauriciotogneri.momowars.validation.endpoints.accounts.GetAccountEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.games.GetGameEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.games.GetOpenGamesEndPoint;
-import com.mauriciotogneri.momowars.validation.endpoints.session.LoginEndPoint;
+import com.mauriciotogneri.momowars.validation.endpoints.session.CreateSessionEndPoint;
 
 import org.junit.Assert;
 
@@ -17,7 +17,7 @@ public class BaseSteps
     public static Account ACCOUNT;
 
     // SESSION
-    protected final LoginEndPoint loginEndPoint = new LoginEndPoint();
+    protected final CreateSessionEndPoint createSessionEndPoint = new CreateSessionEndPoint();
 
     // ACCOUNT
     protected final GetAccountEndPoint getAccountEndPoint = new GetAccountEndPoint();

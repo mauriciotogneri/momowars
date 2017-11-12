@@ -3,15 +3,15 @@ package com.mauriciotogneri.momowars.validation.endpoints.session;
 import com.mauriciotogneri.apivalidator.api.ApiRequest;
 import com.mauriciotogneri.apivalidator.api.ApiResult;
 import com.mauriciotogneri.apivalidator.parameters.body.JsonBodyParameter;
-import com.mauriciotogneri.momowars.api.sessions.Login;
+import com.mauriciotogneri.momowars.api.sessions.CreateSession;
 import com.mauriciotogneri.momowars.validation.BaseEndPoint;
 import com.mauriciotogneri.momowars.validation.EndPointDefinition;
 
-public class LoginEndPoint extends BaseEndPoint implements Login
+public class CreateSessionEndPoint extends BaseEndPoint implements CreateSession
 {
-    public LoginEndPoint()
+    public CreateSessionEndPoint()
     {
-        super(new EndPointDefinition(Login.class));
+        super(new EndPointDefinition(CreateSession.class));
     }
 
     public ApiResult execute(String email, String password) throws Exception

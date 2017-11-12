@@ -1,7 +1,7 @@
 package com.mauriciotogneri.momowars.api.accounts;
 
 import com.mauriciotogneri.jsonschema.annotations.Format;
-import com.mauriciotogneri.momowars.api.accounts.CreateAccount.DataParameter;
+import com.mauriciotogneri.momowars.api.accounts.UpdateAccount.DataParameter;
 import com.mauriciotogneri.momowars.model.accounts.Account;
 import com.mauriciotogneri.momowars.model.headers.ApplicationJson;
 import com.mauriciotogneri.stewie.annotations.EndPoint;
@@ -10,15 +10,15 @@ import com.mauriciotogneri.stewie.annotations.Response;
 import com.mauriciotogneri.stewie.annotations.Responses;
 import com.mauriciotogneri.stewie.types.MimeType;
 
-import static com.mauriciotogneri.stewie.types.Method.POST;
+import static com.mauriciotogneri.stewie.types.Method.PATCH;
 import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
-import static com.mauriciotogneri.stewie.types.StatusCode.CONFLICT;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
 @EndPoint(
         path = "/v1/account",
-        method = POST,
-        description = "Creates a user's account"
+        method = PATCH,
+        description = "Updates a user's account"
 )
 @Parameters(
         header = ApplicationJson.class,
@@ -36,16 +36,14 @@ import static com.mauriciotogneri.stewie.types.StatusCode.OK;
                 description = "Parameters missing or invalid"
         ),
         @Response(
-                code = CONFLICT,
-                description = "An account with the same email already exists"
+                code = UNAUTHORIZED,
+                description = "Session token not valid"
         )
 })
-public interface CreateAccount
+public interface UpdateAccount
 {
     class DataParameter
     {
-        public String email;
-
         @Format("email")
         public String password;
 

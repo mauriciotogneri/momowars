@@ -13,26 +13,6 @@ import cucumber.runtime.java.StepDefAnnotation;
 @StepDefAnnotation
 public class AccountSteps extends BaseSteps
 {
-    @When("^I get the account with an invalid session$")
-    public void getAccountWithAnInvalidSession() throws Exception
-    {
-        ApiResult result = getAccountEndPoint.execute("xxx");
-        checkHttpStatus(401, result);
-    }
-
-    @When("^I get the account with a valid session$")
-    public void getAccountWithAValidSession() throws Exception
-    {
-        ApiResult result = getAccountEndPoint.execute(SESSION_TOKEN);
-        checkHttpStatus(200, result);
-
-        ACCOUNT = json(result, Account.class);
-        Assert.assertEquals("mauricio.togneri@gmail.com", ACCOUNT.email);
-        Assert.assertEquals("Momo", ACCOUNT.nickname);
-    }
-
-    // ========================================================================================== \\
-
     @When("^I create a new account with missing data$")
     public void createANewAccountWithMissingData() throws Exception
     {
@@ -61,5 +41,25 @@ public class AccountSteps extends BaseSteps
     {
         ApiResult result = createAccountEndPoint.execute("mauricio.togneri@gmail.com", "xxx", "Nick");
         checkHttpStatus(409, result);
+    }
+
+    // ========================================================================================== \\
+
+    @When("^I get the account with an invalid session$")
+    public void getAccountWithAnInvalidSession() throws Exception
+    {
+        ApiResult result = getAccountEndPoint.execute("xxx");
+        checkHttpStatus(401, result);
+    }
+
+    @When("^I get the account with a valid session$")
+    public void getAccountWithAValidSession() throws Exception
+    {
+        ApiResult result = getAccountEndPoint.execute(SESSION_TOKEN);
+        checkHttpStatus(200, result);
+
+        ACCOUNT = json(result, Account.class);
+        Assert.assertEquals("mauricio.togneri@gmail.com", ACCOUNT.email);
+        Assert.assertEquals("Momo", ACCOUNT.nickname);
     }
 }

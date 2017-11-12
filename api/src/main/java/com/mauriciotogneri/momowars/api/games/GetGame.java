@@ -10,7 +10,9 @@ import com.mauriciotogneri.stewie.annotations.Responses;
 import com.mauriciotogneri.stewie.types.MimeType;
 
 import static com.mauriciotogneri.stewie.types.Method.GET;
+import static com.mauriciotogneri.stewie.types.StatusCode.FORBIDDEN;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
 @EndPoint(
         path = "/v1/games/{gameId}",
@@ -27,6 +29,14 @@ import static com.mauriciotogneri.stewie.types.StatusCode.OK;
                 description = "Successful operation",
                 produces = MimeType.JSON,
                 type = Game.class
+        ),
+        @Response(
+                code = UNAUTHORIZED,
+                description = "Session token not valid"
+        ),
+        @Response(
+                code = FORBIDDEN,
+                description = "Not allowed to retrieve the game"
         )
 })
 public interface GetGame
