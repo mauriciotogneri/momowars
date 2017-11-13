@@ -21,7 +21,7 @@ class ApiGame : BaseApi()
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
             val gameId = request.pathParam("gameId")
 
-            checkNotEmpty(sessionToken, gameId)
+            checkNotEmpty(sessionToken)
 
             val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
@@ -40,7 +40,7 @@ class ApiGame : BaseApi()
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
             val gameId = request.pathParam("gameId")
 
-            checkNotEmpty(sessionToken, gameId)
+            checkNotEmpty(sessionToken)
 
             val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
@@ -66,25 +66,6 @@ class ApiGame : BaseApi()
         }
     }
 
-    fun createGame(request: Request, response: Response)
-    {
-        process(response)
-        {
-            response.status(501).send()
-        }
-    }
-
-    fun getOpenGames(request: Request, response: Response)
-    {
-        process(response)
-        {
-            val games = DatabaseGame.getOpenGames()
-            val list = games.map { it.basicJson() }
-
-            response.status(200).json(list)
-        }
-    }
-
     fun joinGame(request: Request, response: Response)
     {
         process(response)
@@ -98,6 +79,31 @@ class ApiGame : BaseApi()
         process(response)
         {
             response.status(501).send()
+        }
+    }
+
+    fun createGame(request: Request, response: Response)
+    {
+        process(response)
+        {
+            response.status(501).send()
+        }
+    }
+
+    fun getOpenGames(request: Request, response: Response)
+    {
+        process(response)
+        {
+            val sessionToken = request.headerParam(Api.SESSION_TOKEN)
+
+            checkNotEmpty(sessionToken)
+
+            DatabaseAccount.bySessionToken(sessionToken)
+
+            val games = DatabaseGame.getOpenGames()
+            val list = games.map { it.basicJson() }
+
+            response.status(200).json(list)
         }
     }
 }

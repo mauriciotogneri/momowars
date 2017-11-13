@@ -20,6 +20,13 @@ public class GetGameSteps extends BaseSteps
         checkHttpStatus(401, result);
     }
 
+    @When("^I get a game with invalid parameters$")
+    public void getAGameWithInvalidParameters() throws Exception
+    {
+        ApiResult result = getGameEndPoint.execute("", "xxx");
+        checkHttpStatus(400, result);
+    }
+
     @When("^I get a game with a valid session and invalid id$")
     public void getAGameWithAValidSessionAndInvalidId() throws Exception
     {

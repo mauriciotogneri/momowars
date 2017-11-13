@@ -8,7 +8,7 @@ import com.mauriciotogneri.stewie.annotations.Response;
 import com.mauriciotogneri.stewie.annotations.Responses;
 
 import static com.mauriciotogneri.stewie.types.Method.PATCH;
-import static com.mauriciotogneri.stewie.types.StatusCode.FORBIDDEN;
+import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
 import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
@@ -31,7 +31,11 @@ import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
                 description = "Session token not valid"
         ),
         @Response(
-                code = FORBIDDEN,
+                code = BAD_REQUEST,
+                description = "Session token not provided"
+        ),
+        @Response(
+                code = 412,
                 description = "Not allowed to end the turn on the given game"
         )
 })

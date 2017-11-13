@@ -10,6 +10,7 @@ import com.mauriciotogneri.stewie.annotations.Responses;
 import com.mauriciotogneri.stewie.types.MimeType;
 
 import static com.mauriciotogneri.stewie.types.Method.GET;
+import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
 import static com.mauriciotogneri.stewie.types.StatusCode.FORBIDDEN;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
 import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
@@ -33,6 +34,10 @@ import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
         @Response(
                 code = UNAUTHORIZED,
                 description = "Session token not valid"
+        ),
+        @Response(
+                code = BAD_REQUEST,
+                description = "Session token not provided"
         ),
         @Response(
                 code = FORBIDDEN,

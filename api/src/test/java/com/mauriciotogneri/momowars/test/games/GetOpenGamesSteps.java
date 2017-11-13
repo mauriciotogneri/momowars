@@ -13,14 +13,14 @@ import cucumber.runtime.java.StepDefAnnotation;
 @StepDefAnnotation
 public class GetOpenGamesSteps extends BaseSteps
 {
-    @When("^I get the open games an invalid session$")
+    @When("^I get the open games with an invalid session$")
     public void getTheOpenGamesWithAnInvalidSession() throws Exception
     {
         ApiResult result = getOpenGamesEndPoint.execute("xxx");
         checkHttpStatus(401, result);
     }
 
-    @When("^I get the open games a valid session$")
+    @When("^I get the open games with a valid session$")
     public void getTheOpenGamesWithAValidSession() throws Exception
     {
         ApiResult result = getOpenGamesEndPoint.execute(CreateSessionSteps.SESSION_TOKEN);
