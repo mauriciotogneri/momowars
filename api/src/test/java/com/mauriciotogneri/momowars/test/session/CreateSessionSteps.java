@@ -1,13 +1,14 @@
-package com.mauriciotogneri.momowars.test;
+package com.mauriciotogneri.momowars.test.session;
 
 import com.mauriciotogneri.apivalidator.api.ApiResult;
+import com.mauriciotogneri.momowars.test.BaseSteps;
 import com.mauriciotogneri.momowars.validation.BaseEndPoint;
 
 import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
 
 @StepDefAnnotation
-public class SessionSteps extends BaseSteps
+public class CreateSessionSteps extends BaseSteps
 {
     @When("^I login with no parameters$")
     public void loginWithNoParameters() throws Exception
