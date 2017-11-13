@@ -5,6 +5,7 @@ import com.mauriciotogneri.javautils.Json;
 import com.mauriciotogneri.momowars.model.accounts.Account;
 import com.mauriciotogneri.momowars.validation.endpoints.accounts.CreateAccountEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.accounts.GetAccountEndPoint;
+import com.mauriciotogneri.momowars.validation.endpoints.accounts.UpdateAccountEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.games.GetGameEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.games.GetOpenGamesEndPoint;
 import com.mauriciotogneri.momowars.validation.endpoints.session.CreateSessionEndPoint;
@@ -20,12 +21,13 @@ public class BaseSteps
     protected final CreateSessionEndPoint createSessionEndPoint = new CreateSessionEndPoint();
 
     // ACCOUNT
-    protected final GetAccountEndPoint getAccountEndPoint = new GetAccountEndPoint();
     protected final CreateAccountEndPoint createAccountEndPoint = new CreateAccountEndPoint();
+    protected final GetAccountEndPoint getAccountEndPoint = new GetAccountEndPoint();
+    protected final UpdateAccountEndPoint updateAccountEndPoint = new UpdateAccountEndPoint();
 
     // GAMES
-    protected final GetGameEndPoint getGameEndPoint = new GetGameEndPoint();
     protected final GetOpenGamesEndPoint getOpenGamesEndPoint = new GetOpenGamesEndPoint();
+    protected final GetGameEndPoint getGameEndPoint = new GetGameEndPoint();
 
     @SuppressWarnings("unchecked")
     protected <T> T json(ApiResult apiResult, Class<T> clazz) throws Exception

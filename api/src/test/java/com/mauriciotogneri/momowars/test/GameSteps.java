@@ -11,6 +11,27 @@ import cucumber.runtime.java.StepDefAnnotation;
 @StepDefAnnotation
 public class GameSteps extends BaseSteps
 {
+    // ===================================== GET OPEN GAMES ===================================== \\
+
+    @When("^I get the open games an invalid session$")
+    public void getTheOpenGamesWithAnInvalidSession() throws Exception
+    {
+        ApiResult result = getOpenGamesEndPoint.execute("xxx");
+        checkHttpStatus(401, result);
+    }
+
+    @When("^I get the open games a valid session$")
+    public void getTheOpenGamesWithAValidSession() throws Exception
+    {
+        ApiResult result = getOpenGamesEndPoint.execute(SessionSteps.SESSION_TOKEN);
+        checkHttpStatus(200, result);
+
+        Game[] games = json(result, Game[].class);
+        Assert.assertNotEquals(null, games);
+    }
+
+    // ======================================== GET GAME ======================================== \\
+
     @When("^I get a game with an invalid session$")
     public void getAGameWithAnInvalidSession() throws Exception
     {
@@ -36,17 +57,5 @@ public class GameSteps extends BaseSteps
             Game game = json(result, Game.class);
             Assert.assertNotEquals(null, game);
         }
-    }
-
-    // ========================================================================================== \\
-
-    @When("^I get the open games$")
-    public void getTheOpenGames() throws Exception
-    {
-        ApiResult result = getOpenGamesEndPoint.execute(SessionSteps.SESSION_TOKEN);
-        checkHttpStatus(200, result);
-
-        Game[] games = json(result, Game[].class);
-        Assert.assertNotEquals(null, games);
     }
 }

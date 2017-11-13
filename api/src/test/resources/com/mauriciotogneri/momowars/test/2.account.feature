@@ -8,3 +8,8 @@ Feature: Account API
     Scenario: get account
         When I get the account with an invalid session
         When I get the account with a valid session
+        
+    Scenario: update account
+        When I update the account with an invalid session
+        When I update the account with invalid parameters
+        When I update the account with valid parameters

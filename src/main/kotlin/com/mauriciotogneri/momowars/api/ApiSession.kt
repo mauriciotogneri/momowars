@@ -30,10 +30,10 @@ class ApiSession : BaseApi()
 
             val sessionId = newSessionId()
 
-            val update = json()
-            update["session"] = sessionId
+            val json = json()
+            json["session"] = sessionId
 
-            documentAccount.update(update)
+            documentAccount.update(json)
 
             response
                     .status(200)

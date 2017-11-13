@@ -13,6 +13,8 @@ import cucumber.runtime.java.StepDefAnnotation;
 @StepDefAnnotation
 public class AccountSteps extends BaseSteps
 {
+    // ==================================== CREATE ACCOUNT ====================================== \\
+
     @When("^I create a new account with missing data$")
     public void createANewAccountWithMissingData() throws Exception
     {
@@ -43,7 +45,7 @@ public class AccountSteps extends BaseSteps
         checkHttpStatus(409, result);
     }
 
-    // ========================================================================================== \\
+    // ==================================== GET ACCOUNT ========================================= \\
 
     @When("^I get the account with an invalid session$")
     public void getAccountWithAnInvalidSession() throws Exception
@@ -61,5 +63,31 @@ public class AccountSteps extends BaseSteps
         ACCOUNT = json(result, Account.class);
         Assert.assertEquals("mauricio.togneri@gmail.com", ACCOUNT.email);
         Assert.assertEquals("Momo", ACCOUNT.nickname);
+    }
+
+    // =================================== UPDATE ACCOUNT ======================================= \\
+
+    @When("^I update the account with an invalid session$")
+    public void updateAccountWithAnInvalidSession() throws Exception
+    {
+        ApiResult result = updateAccountEndPoint.execute("xxx", "password", "Nick");
+        checkHttpStatus(401, result);
+    }
+
+    @When("^I update the account with invalid parameters$")
+    public void updateAccountWithInvalidParameters() throws Exception
+    {
+        ApiResult result = updateAccountEndPoint.execute(SESSION_TOKEN, null, null);
+        checkHttpStatus(400, result);
+    }
+
+    @When("^I update the account with valid parameters$")
+    public void updateAccountWithValidParameters() throws Exception
+    {
+        ApiResult result = updateAccountEndPoint.execute(SESSION_TOKEN, "password", "Nick");
+        checkHttpStatus(200, result);
+
+        Account account = json(result, Account.class);
+        Assert.assertNotEquals(null, account);
     }
 }
