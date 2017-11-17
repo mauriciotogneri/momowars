@@ -16,11 +16,11 @@ fun main(args: Array<String>)
     val express = require("express")
     val app = express()
 
-    // =================================== SESSION ==========================================
+    // ======================================= SESSION ========================================== \\
 
     app.post("/v1/session", Api.session::createSession)
 
-    // ==================================== ACCOUNT =========================================
+    // ======================================= ACCOUNT ========================================== \\
 
     app.get("/v1/account", Api.account::getAccount)
 
@@ -28,27 +28,29 @@ fun main(args: Array<String>)
 
     app.patch("/v1/account", Api.account::updateAccount)
 
-    // ====================================== GAMES =========================================
+    // ======================================== GAMES =========================================== \\
 
     app.get("/v1/games", Api.game::getOpenGames)
 
-    app.get("/v1/games/:gameId", Api.game::getGame)
-
-    app.patch("/v1/games/:gameId", Api.game::endTurn)
-
-    app.post("/v1/games/:gameId", Api.game::joinGame)
-
-    app.delete("/v1/games/:gameId", Api.game::leaveGame)
-
     app.post("/v1/games", Api.game::createGame)
 
-    // ====================================== UNITS =========================================
+    app.get("/v1/games/:gameId", Api.game::getGame)
 
-    app.patch("/v1/games/:gameId/cells/:cellId/units/:unitId/move", Api.unit::moveUnits)
+    // ======================================== PLAYERS ========================================= \\
+
+    app.post("/v1/games/:gameId/players", Api.game::joinGame)
+
+    app.delete("/v1/games/:gameId/players/:playerId", Api.game::leaveGame)
+
+    app.delete("/v1/games/:gameId/players/:playerId/turn", Api.game::endTurn)
+
+    // ========================================= UNITS ========================================== \\
+
+    app.put("/v1/games/:gameId/cells/:cellId/units/:unitId/move", Api.unit::moveUnits)
 
     app.put("/v1/games/:gameId/cells/:cellId/units", Api.unit::recruitUnits)
 
-    // ======================================= MAPS =========================================
+    // ========================================== MAPS ========================================== \\
 
     app.get("/v1/maps", Api.map::getMaps)
 

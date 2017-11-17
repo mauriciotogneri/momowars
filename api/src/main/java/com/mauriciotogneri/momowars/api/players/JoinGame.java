@@ -1,21 +1,21 @@
-package com.mauriciotogneri.momowars.api.games;
+package com.mauriciotogneri.momowars.api.players;
 
-import com.mauriciotogneri.momowars.api.games.LeaveGame.PathParameter;
+import com.mauriciotogneri.momowars.api.players.JoinGame.PathParameter;
 import com.mauriciotogneri.momowars.model.headers.SessionToken;
 import com.mauriciotogneri.stewie.annotations.EndPoint;
 import com.mauriciotogneri.stewie.annotations.Parameters;
 import com.mauriciotogneri.stewie.annotations.Response;
 import com.mauriciotogneri.stewie.annotations.Responses;
 
-import static com.mauriciotogneri.stewie.types.Method.DELETE;
-import static com.mauriciotogneri.stewie.types.StatusCode.FORBIDDEN;
+import static com.mauriciotogneri.stewie.types.Method.POST;
+import static com.mauriciotogneri.stewie.types.StatusCode.CONFLICT;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
 import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
 @EndPoint(
-        path = "/v1/games/{gameId}",
-        method = DELETE,
-        description = "Leaves the given game"
+        path = "/v1/games/{gameId}/players",
+        method = POST,
+        description = "Joins the given game"
 )
 @Parameters(
         header = SessionToken.class,
@@ -31,11 +31,11 @@ import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
                 description = "Session token not valid"
         ),
         @Response(
-                code = FORBIDDEN,
-                description = "Not allowed to leave the given game"
+                code = CONFLICT,
+                description = "The game is full"
         )
 })
-public interface LeaveGame
+public interface JoinGame
 {
     class PathParameter
     {

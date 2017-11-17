@@ -7,7 +7,7 @@ import com.mauriciotogneri.stewie.annotations.Parameters;
 import com.mauriciotogneri.stewie.annotations.Response;
 import com.mauriciotogneri.stewie.annotations.Responses;
 
-import static com.mauriciotogneri.stewie.types.Method.PATCH;
+import static com.mauriciotogneri.stewie.types.Method.PUT;
 import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
 import static com.mauriciotogneri.stewie.types.StatusCode.NOT_FOUND;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
@@ -15,7 +15,7 @@ import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
 @EndPoint(
         path = "/v1/games/{gameId}/cells/{cellId}/units/{unitId}/move",
-        method = PATCH,
+        method = PUT,
         description = "Enqueues the command to move the units"
 )
 @Parameters(

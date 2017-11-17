@@ -1,20 +1,20 @@
-package com.mauriciotogneri.momowars.api.games;
+package com.mauriciotogneri.momowars.api.players;
 
-import com.mauriciotogneri.momowars.api.games.EndTurn.PathParameter;
+import com.mauriciotogneri.momowars.api.players.EndTurn.PathParameter;
 import com.mauriciotogneri.momowars.model.headers.SessionToken;
 import com.mauriciotogneri.stewie.annotations.EndPoint;
 import com.mauriciotogneri.stewie.annotations.Parameters;
 import com.mauriciotogneri.stewie.annotations.Response;
 import com.mauriciotogneri.stewie.annotations.Responses;
 
-import static com.mauriciotogneri.stewie.types.Method.PATCH;
+import static com.mauriciotogneri.stewie.types.Method.DELETE;
 import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
 import static com.mauriciotogneri.stewie.types.StatusCode.OK;
 import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
 @EndPoint(
-        path = "/v1/games/{gameId}",
-        method = PATCH,
+        path = "/v1/games/{gameId}/players/{playerId}/turn",
+        method = DELETE,
         description = "Ends the turn of the player for the given game"
 )
 @Parameters(
@@ -44,5 +44,7 @@ public interface EndTurn
     class PathParameter
     {
         public String gameId;
+
+        public String playerId;
     }
 }

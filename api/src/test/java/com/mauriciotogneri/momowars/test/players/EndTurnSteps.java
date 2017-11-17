@@ -1,30 +1,27 @@
-package com.mauriciotogneri.momowars.test.games;
+package com.mauriciotogneri.momowars.test.players;
 
-import com.mauriciotogneri.apivalidator.api.ApiResult;
 import com.mauriciotogneri.momowars.test.BaseSteps;
 
-import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
 
 @StepDefAnnotation
 public class EndTurnSteps extends BaseSteps
 {
-    @When("^I end a turn with an invalid session$")
+    /*@When("^I end a turn with an invalid session$")
     public void endATurnWithAnInvalidSession() throws Exception
     {
-        ApiResult result = endTurnEndPoint.execute("xxx", "xxx");
+        ApiResult result = endTurnEndPoint.execute("xxx", "xxx", "xxx");
         checkHttpStatus(401, result);
     }
 
     @When("^I end a turn with invalid parameters$")
     public void endATurnWithInvalidParameters() throws Exception
     {
-        ApiResult result = endTurnEndPoint.execute("", "xxx");
+        ApiResult result = endTurnEndPoint.execute("", "xxx", "xxx");
         checkHttpStatus(400, result);
     }
 
-    // TODO
-    /*@When("^I end a turn on an invalid game$")
+    @When("^I end a turn on an invalid game$")
     public void endATurnOnAnInvalidGame() throws Exception
     {
         ApiResult result = endTurnEndPoint.execute(CreateSessionSteps.SESSION_TOKEN, "xxx");

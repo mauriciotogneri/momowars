@@ -1,23 +1,24 @@
-package com.mauriciotogneri.momowars.validation.endpoints.games;
+package com.mauriciotogneri.momowars.validation.endpoints.players;
 
 import com.mauriciotogneri.apivalidator.api.ApiRequest;
 import com.mauriciotogneri.apivalidator.api.ApiResult;
 import com.mauriciotogneri.apivalidator.parameters.path.PathParameters;
-import com.mauriciotogneri.momowars.api.games.JoinGame;
+import com.mauriciotogneri.momowars.api.players.EndTurn;
 import com.mauriciotogneri.momowars.validation.BaseEndPoint;
 import com.mauriciotogneri.momowars.validation.EndPointDefinition;
 
-public class JoinGameEndPoint extends BaseEndPoint implements JoinGame
+public class EndTurnEndPoint extends BaseEndPoint implements EndTurn
 {
-    public JoinGameEndPoint()
+    public EndTurnEndPoint()
     {
-        super(new EndPointDefinition(JoinGame.class));
+        super(new EndPointDefinition(EndTurn.class));
     }
 
-    public ApiResult execute(String sessionToken, String gameId) throws Exception
+    public ApiResult execute(String sessionToken, String gameId, String playerId) throws Exception
     {
         PathParameter path = new PathParameter();
         path.gameId = gameId;
+        path.playerId = playerId;
 
         ApiRequest.Builder builder = request();
         builder.header(HEADER_SESSION_TOKEN, sessionToken);

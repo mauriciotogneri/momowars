@@ -17,6 +17,9 @@
       "name": "Maps"
     },
     {
+      "name": "Players"
+    },
+    {
       "name": "Sessions"
     },
     {
@@ -27,6 +30,49 @@
     "https"
   ],
   "paths": {
+    "/v1/games/{gameId}/players/{playerId}/turn": {
+      "delete": {
+        "tags": [
+          "Players"
+        ],
+        "summary": "EndTurn",
+        "description": "Ends the turn of the player for the given game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "playerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Session token not provided"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "412": {
+            "description": "Not allowed to end the turn on the given game"
+          }
+        }
+      }
+    },
     "/v1/maps": {
       "get": {
         "tags": [
@@ -265,70 +311,6 @@
       }
     },
     "/v1/games/{gameId}": {
-      "patch": {
-        "tags": [
-          "Games"
-        ],
-        "summary": "EndTurn",
-        "description": "Ends the turn of the player for the given game",
-        "parameters": [
-          {
-            "name": "Session-Token",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "gameId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation"
-          },
-          "401": {
-            "description": "Session token not valid"
-          },
-          "403": {
-            "description": "Not allowed to end the turn on the given game"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Games"
-        ],
-        "summary": "JoinGame",
-        "description": "Joins the given game",
-        "parameters": [
-          {
-            "name": "Session-Token",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "gameId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation"
-          },
-          "401": {
-            "description": "Session token not valid"
-          },
-          "409": {
-            "description": "The game is full"
-          }
-        }
-      },
       "get": {
         "tags": [
           "Games"
@@ -359,43 +341,14 @@
             },
             "description": "Successful operation"
           },
+          "400": {
+            "description": "Session token not provided"
+          },
           "401": {
             "description": "Session token not valid"
           },
           "403": {
             "description": "Not allowed to retrieve the game"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Games"
-        ],
-        "summary": "LeaveGame",
-        "description": "Leaves the given game",
-        "parameters": [
-          {
-            "name": "Session-Token",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "gameId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation"
-          },
-          "401": {
-            "description": "Session token not valid"
-          },
-          "403": {
-            "description": "Not allowed to leave the given game"
           }
         }
       }
@@ -434,7 +387,7 @@
       }
     },
     "/v1/games/{gameId}/cells/{cellId}/units/{unitId}/move": {
-      "patch": {
+      "put": {
         "tags": [
           "Units"
         ],
@@ -499,6 +452,80 @@
           },
           "401": {
             "description": "Session token not valid"
+          }
+        }
+      }
+    },
+    "/v1/games/{gameId}/players": {
+      "post": {
+        "tags": [
+          "Players"
+        ],
+        "summary": "JoinGame",
+        "description": "Joins the given game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "409": {
+            "description": "The game is full"
+          }
+        }
+      }
+    },
+    "/v1/games/{gameId}/players/{playerId}": {
+      "delete": {
+        "tags": [
+          "Players"
+        ],
+        "summary": "LeaveGame",
+        "description": "Leaves the given game",
+        "parameters": [
+          {
+            "name": "Session-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "playerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Session token not valid"
+          },
+          "403": {
+            "description": "Not allowed to leave the given game"
           }
         }
       }
