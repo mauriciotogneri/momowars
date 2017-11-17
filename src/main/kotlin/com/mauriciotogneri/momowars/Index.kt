@@ -38,11 +38,11 @@ fun main(args: Array<String>)
 
     // ======================================== PLAYERS ========================================= \\
 
-    app.post("/v1/games/:gameId/players", Api.game::joinGame)
+    app.post("/v1/games/:gameId/players", Api.player::joinGame)
 
-    app.delete("/v1/games/:gameId/players/:playerId", Api.game::leaveGame)
+    app.delete("/v1/games/:gameId/players/:playerId", Api.player::leaveGame)
 
-    app.delete("/v1/games/:gameId/players/:playerId/turn", Api.game::endTurn)
+    app.delete("/v1/games/:gameId/players/:playerId/turn", Api.player::endTurn)
 
     // ========================================= UNITS ========================================== \\
 

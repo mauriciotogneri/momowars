@@ -3,7 +3,7 @@ package com.mauriciotogneri.momowars.api
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 
-class ApiMaps : BaseApi()
+class ApiMap : BaseApi()
 {
     fun getMaps(request: Request, response: Response)
     {

@@ -3,7 +3,7 @@ package com.mauriciotogneri.momowars.api
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 
-class ApiUnits : BaseApi()
+class ApiUnit : BaseApi()
 {
     fun moveUnits(request: Request, response: Response)
     {

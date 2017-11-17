@@ -5,8 +5,9 @@ object Api
     val session = ApiSession()
     val account = ApiAccount()
     val game = ApiGame()
-    val unit = ApiUnits()
-    val map = ApiMaps()
+    val player = ApiPlayer()
+    val unit = ApiUnit()
+    val map = ApiMap()
 
     val SESSION_TOKEN = "Session-Token"
 }

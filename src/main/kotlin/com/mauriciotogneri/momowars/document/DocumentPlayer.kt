@@ -12,6 +12,8 @@ class DocumentPlayer(val doc: DocumentSnapshot, private val documentAccount: Doc
     private val resources: Int = doc.data().resources
     private val status: String = doc.data().status
 
+    fun id() = doc.id
+
     fun status() = status
 
     suspend fun endTurn()
