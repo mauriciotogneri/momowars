@@ -3,6 +3,7 @@ package com.mauriciotogneri.momowars.api
 import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.database.DatabaseGame
 import com.mauriciotogneri.momowars.exception.ForbiddenException
+import com.mauriciotogneri.momowars.exception.InternalServerErrorException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 import com.mauriciotogneri.momowars.express.headerParam
@@ -33,7 +34,7 @@ class ApiGame : BaseApi()
     {
         process(response)
         {
-            response.status(501).send()
+            throw InternalServerErrorException()
         }
     }
 

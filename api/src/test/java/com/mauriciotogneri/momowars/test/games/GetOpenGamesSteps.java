@@ -7,6 +7,8 @@ import com.mauriciotogneri.momowars.test.session.CreateSessionSteps;
 
 import org.junit.Assert;
 
+import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
 
@@ -17,14 +19,14 @@ public class GetOpenGamesSteps extends BaseSteps
     public void getTheOpenGamesWithAnInvalidSession() throws Exception
     {
         ApiResult result = getOpenGamesEndPoint.execute("xxx");
-        checkHttpStatus(401, result);
+        checkHttpStatus(UNAUTHORIZED, result);
     }
 
     @When("^I get the open games with a valid session$")
     public void getTheOpenGamesWithAValidSession() throws Exception
     {
         ApiResult result = getOpenGamesEndPoint.execute(CreateSessionSteps.SESSION_TOKEN);
-        checkHttpStatus(200, result);
+        checkHttpStatus(OK, result);
 
         Game[] games = json(result, Game[].class);
         Assert.assertNotEquals(null, games);

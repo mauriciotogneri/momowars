@@ -6,6 +6,9 @@ import com.mauriciotogneri.momowars.test.BaseSteps;
 
 import org.junit.Assert;
 
+import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
+import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
 
@@ -16,21 +19,21 @@ public class UpdateAccountSteps extends BaseSteps
     public void updateAccountWithAnInvalidSession() throws Exception
     {
         ApiResult result = updateAccountEndPoint.execute("xxx", "password", "Momo");
-        checkHttpStatus(401, result);
+        checkHttpStatus(UNAUTHORIZED, result);
     }
 
     @When("^I update the account with invalid parameters$")
     public void updateAccountWithInvalidParameters() throws Exception
     {
         ApiResult result = updateAccountEndPoint.execute(SESSION_TOKEN, null, null);
-        checkHttpStatus(400, result);
+        checkHttpStatus(BAD_REQUEST, result);
     }
 
     @When("^I update the account with valid parameters$")
     public void updateAccountWithValidParameters() throws Exception
     {
         ApiResult result = updateAccountEndPoint.execute(SESSION_TOKEN, "password", "Momo");
-        checkHttpStatus(200, result);
+        checkHttpStatus(OK, result);
 
         Account account = json(result, Account.class);
         Assert.assertNotEquals(null, account);

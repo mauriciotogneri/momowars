@@ -5,6 +5,7 @@ import com.mauriciotogneri.momowars.constants.PlayerStatus
 import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.database.DatabaseGame
 import com.mauriciotogneri.momowars.exception.ForbiddenException
+import com.mauriciotogneri.momowars.exception.InternalServerErrorException
 import com.mauriciotogneri.momowars.exception.NotFoundException
 import com.mauriciotogneri.momowars.exception.PreconditionFailedException
 import com.mauriciotogneri.momowars.express.Request
@@ -57,7 +58,7 @@ class ApiPlayer : BaseApi()
     {
         process(response)
         {
-            response.status(501).send()
+            throw InternalServerErrorException()
         }
     }
 
@@ -65,7 +66,7 @@ class ApiPlayer : BaseApi()
     {
         process(response)
         {
-            response.status(501).send()
+            throw InternalServerErrorException()
         }
     }
 

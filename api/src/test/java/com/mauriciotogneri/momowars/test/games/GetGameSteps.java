@@ -7,6 +7,10 @@ import com.mauriciotogneri.momowars.test.session.CreateSessionSteps;
 
 import org.junit.Assert;
 
+import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
+import static com.mauriciotogneri.stewie.types.StatusCode.FORBIDDEN;
+import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
 
@@ -17,21 +21,21 @@ public class GetGameSteps extends BaseSteps
     public void getAGameWithAnInvalidSession() throws Exception
     {
         ApiResult result = getGameEndPoint.execute("xxx", "xxx");
-        checkHttpStatus(401, result);
+        checkHttpStatus(UNAUTHORIZED, result);
     }
 
     @When("^I get a game with invalid parameters$")
     public void getAGameWithInvalidParameters() throws Exception
     {
         ApiResult result = getGameEndPoint.execute("", "xxx");
-        checkHttpStatus(400, result);
+        checkHttpStatus(BAD_REQUEST, result);
     }
 
     @When("^I get a game with a valid session and invalid id$")
     public void getAGameWithAValidSessionAndInvalidId() throws Exception
     {
         ApiResult result = getGameEndPoint.execute(CreateSessionSteps.SESSION_TOKEN, "xxx");
-        checkHttpStatus(403, result);
+        checkHttpStatus(FORBIDDEN, result);
     }
 
     @When("^I get a game with a valid session and valid id$")
@@ -40,7 +44,7 @@ public class GetGameSteps extends BaseSteps
         for (String gameId : ACCOUNT.games)
         {
             ApiResult result = getGameEndPoint.execute(CreateSessionSteps.SESSION_TOKEN, gameId);
-            checkHttpStatus(200, result);
+            checkHttpStatus(OK, result);
 
             Game game = json(result, Game.class);
             Assert.assertNotEquals(null, game);

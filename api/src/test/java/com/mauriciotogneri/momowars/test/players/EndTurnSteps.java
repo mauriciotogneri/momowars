@@ -11,14 +11,14 @@ public class EndTurnSteps extends BaseSteps
     public void endATurnWithAnInvalidSession() throws Exception
     {
         ApiResult result = endTurnEndPoint.execute("xxx", "xxx", "xxx");
-        checkHttpStatus(401, result);
+        checkHttpStatus(UNAUTHORIZED, result);
     }
 
     @When("^I end a turn with invalid parameters$")
     public void endATurnWithInvalidParameters() throws Exception
     {
         ApiResult result = endTurnEndPoint.execute("", "xxx", "xxx");
-        checkHttpStatus(400, result);
+        checkHttpStatus(BAD_REQUEST, result);
     }
 
     @When("^I end a turn on an invalid game$")
@@ -34,7 +34,7 @@ public class EndTurnSteps extends BaseSteps
         for (String gameId : ACCOUNT.games)
         {
             ApiResult result = endTurnEndPoint.execute(CreateSessionSteps.SESSION_TOKEN, gameId);
-            checkHttpStatus(200, result);
+            checkHttpStatus(NO_CONTENT, result);
         }
     }*/
 }

@@ -8,6 +8,9 @@ import org.junit.Assert;
 
 import java.util.UUID;
 
+import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
+import static com.mauriciotogneri.stewie.types.StatusCode.CONFLICT;
+import static com.mauriciotogneri.stewie.types.StatusCode.CREATED;
 import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
 
@@ -18,7 +21,7 @@ public class CreateAccountSteps extends BaseSteps
     public void createANewAccountWithMissingData() throws Exception
     {
         ApiResult result = createAccountEndPoint.execute(null, null, null);
-        checkHttpStatus(400, result);
+        checkHttpStatus(BAD_REQUEST, result);
     }
 
     @When("^I create a new account with an existing email$")
@@ -29,7 +32,7 @@ public class CreateAccountSteps extends BaseSteps
         String nickname = "Momo";
 
         ApiResult result = createAccountEndPoint.execute(email, password, nickname);
-        checkHttpStatus(200, result);
+        checkHttpStatus(CREATED, result);
 
         Account account = json(result, Account.class);
         Assert.assertEquals(email, account.email);
@@ -41,6 +44,6 @@ public class CreateAccountSteps extends BaseSteps
     public void createANewAccountWithValidData() throws Exception
     {
         ApiResult result = createAccountEndPoint.execute("mauricio.togneri@gmail.com", "xxx", "Momo");
-        checkHttpStatus(409, result);
+        checkHttpStatus(CONFLICT, result);
     }
 }

@@ -1,5 +1,6 @@
 package com.mauriciotogneri.momowars.api
 
+import com.mauriciotogneri.momowars.exception.InternalServerErrorException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
 
@@ -9,7 +10,7 @@ class ApiUnit : BaseApi()
     {
         process(response)
         {
-            response.status(501).send()
+            throw InternalServerErrorException()
         }
     }
 
@@ -17,7 +18,7 @@ class ApiUnit : BaseApi()
     {
         process(response)
         {
-            response.status(501).send()
+            throw InternalServerErrorException()
         }
     }
 }
