@@ -22,7 +22,7 @@ class ApiAccount : BaseApi()
             val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
 
             response
-                    .status(200)
+                    .status(OK)
                     .json(documentAccount.toJson())
         }
     }
@@ -45,7 +45,7 @@ class ApiAccount : BaseApi()
             val documentAccount = DatabaseAccount.createAccount(email, password, nickname)
 
             response
-                    .status(200)
+                    .status(CREATED)
                     .set(Api.SESSION_TOKEN, documentAccount.session())
                     .json(documentAccount.toJson())
         }
@@ -69,7 +69,7 @@ class ApiAccount : BaseApi()
 
             documentAccount.update(json)
 
-            response.status(200).json(DatabaseAccount.bySessionToken(sessionToken).toJson())
+            response.status(OK).json(DatabaseAccount.bySessionToken(sessionToken).toJson())
         }
     }
 }

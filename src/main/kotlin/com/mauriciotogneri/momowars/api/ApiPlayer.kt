@@ -49,7 +49,7 @@ class ApiPlayer : BaseApi()
 
             documentPlayer.endTurn()
 
-            response.status(200).send()
+            response.status(NO_CONTENT).send()
         }
     }
 

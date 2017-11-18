@@ -36,7 +36,7 @@ class ApiSession : BaseApi()
             documentAccount.update(json)
 
             response
-                    .status(200)
+                    .status(CREATED)
                     .set(Api.SESSION_TOKEN, sessionId)
                     .send()
         }

@@ -13,7 +13,7 @@ import com.mauriciotogneri.stewie.types.MimeType;
 import static com.mauriciotogneri.stewie.types.Method.POST;
 import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
 import static com.mauriciotogneri.stewie.types.StatusCode.CONFLICT;
-import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.CREATED;
 
 @EndPoint(
         path = "/v1/account",
@@ -26,7 +26,7 @@ import static com.mauriciotogneri.stewie.types.StatusCode.OK;
 )
 @Responses({
         @Response(
-                code = OK,
+                code = CREATED,
                 description = "Successful operation",
                 produces = MimeType.JSON,
                 type = Account.class

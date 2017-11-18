@@ -25,7 +25,7 @@ class ApiGame : BaseApi()
 
             val documentGame = DatabaseGame.byRef(gameRef)
 
-            response.status(200).json(documentGame.toJson())
+            response.status(OK).json(documentGame.toJson())
         }
     }
 
@@ -50,7 +50,7 @@ class ApiGame : BaseApi()
             val games = DatabaseGame.getOpenGames()
             val list = games.map { it.basicJson() }
 
-            response.status(200).json(list)
+            response.status(OK).json(list)
         }
     }
 }

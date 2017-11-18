@@ -7,6 +7,10 @@ import com.mauriciotogneri.momowars.utils.launch
 
 open class BaseApi
 {
+    protected val OK = 200
+    protected val CREATED = 201
+    protected val NO_CONTENT = 204
+
     protected fun process(response: Response, block: suspend () -> Unit)
     {
         launch {

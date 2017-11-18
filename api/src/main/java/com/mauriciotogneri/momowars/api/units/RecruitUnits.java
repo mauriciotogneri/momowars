@@ -11,7 +11,7 @@ import com.mauriciotogneri.stewie.annotations.Responses;
 import static com.mauriciotogneri.stewie.types.Method.PATCH;
 import static com.mauriciotogneri.stewie.types.StatusCode.BAD_REQUEST;
 import static com.mauriciotogneri.stewie.types.StatusCode.NOT_FOUND;
-import static com.mauriciotogneri.stewie.types.StatusCode.OK;
+import static com.mauriciotogneri.stewie.types.StatusCode.NO_CONTENT;
 import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 
 @EndPoint(
@@ -24,7 +24,7 @@ import static com.mauriciotogneri.stewie.types.StatusCode.UNAUTHORIZED;
 )
 @Responses({
         @Response(
-                code = OK,
+                code = NO_CONTENT,
                 description = "Successful operation"
         ),
         @Response(
