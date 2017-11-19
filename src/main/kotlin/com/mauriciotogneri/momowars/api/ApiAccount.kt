@@ -1,6 +1,5 @@
 package com.mauriciotogneri.momowars.api
 
-import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.exception.ConflictException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
@@ -13,13 +12,13 @@ class ApiAccount : BaseApi()
 {
     fun getAccount(request: Request, response: Response)
     {
-        process(response)
-        {
+        process(response) { database ->
+
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
 
             checkNotEmpty(sessionToken)
 
-            val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
+            val documentAccount = database.account.bySessionToken(sessionToken)
 
             response
                     .status(OK)
@@ -29,20 +28,20 @@ class ApiAccount : BaseApi()
 
     fun createAccount(request: Request, response: Response)
     {
-        process(response)
-        {
+        process(response) { database ->
+
             val email = request.bodyParam("email")
             val password = request.bodyParam("password")
             val nickname = request.bodyParam("nickname")
 
             checkNotEmpty(email, password, nickname)
 
-            if (DatabaseAccount.exists(email))
+            if (database.account.exists(email))
             {
                 throw ConflictException()
             }
 
-            val documentAccount = DatabaseAccount.createAccount(email, password, nickname)
+            val documentAccount = database.account.createAccount(email, password, nickname)
 
             response
                     .status(CREATED)
@@ -53,15 +52,15 @@ class ApiAccount : BaseApi()
 
     fun updateAccount(request: Request, response: Response)
     {
-        process(response)
-        {
+        process(response) { database ->
+
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
             val password = request.bodyParam("password")
             val nickname = request.bodyParam("nickname")
 
             checkNotEmpty(sessionToken, password, nickname)
 
-            val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
+            val documentAccount = database.account.bySessionToken(sessionToken)
 
             val json = json()
             json["password"] = Hash.sha512(password)
@@ -69,7 +68,7 @@ class ApiAccount : BaseApi()
 
             documentAccount.update(json)
 
-            response.status(OK).json(DatabaseAccount.bySessionToken(sessionToken).toJson())
+            response.status(OK).json(database.account.bySessionToken(sessionToken).toJson())
         }
     }
 }

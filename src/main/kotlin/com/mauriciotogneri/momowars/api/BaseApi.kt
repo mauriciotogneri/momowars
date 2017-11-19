@@ -1,5 +1,6 @@
 package com.mauriciotogneri.momowars.api
 
+import com.mauriciotogneri.momowars.database.Database
 import com.mauriciotogneri.momowars.exception.BadRequestException
 import com.mauriciotogneri.momowars.exception.HttpException
 import com.mauriciotogneri.momowars.express.Response
@@ -11,12 +12,16 @@ open class BaseApi
     protected val CREATED = 201
     protected val NO_CONTENT = 204
 
-    protected fun process(response: Response, block: suspend () -> Unit)
+    protected fun process(
+            response: Response,
+            function: suspend (database: Database) -> Unit)
     {
         launch {
             try
             {
-                block.invoke()
+                Database.firestore.runTransaction { transaction ->
+                    function.invoke(Database(transaction))
+                }
             }
             catch (exception: Throwable)
             {

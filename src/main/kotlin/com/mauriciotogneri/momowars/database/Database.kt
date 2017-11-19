@@ -1,13 +1,21 @@
 package com.mauriciotogneri.momowars.database
 
 import com.mauriciotogneri.momowars.firebase.Firestore
+import com.mauriciotogneri.momowars.firebase.Transaction
 
-object Database
+class Database(val transaction: Transaction)
 {
-    lateinit var firestore: Firestore
+    val account = DatabaseAccount(this)
+    val game = DatabaseGame(this)
+    val player = DatabasePlayer(this)
 
-    fun initialize(admin: dynamic)
+    companion object
     {
-        firestore = admin.firestore()
+        lateinit var firestore: Firestore
+
+        fun initialize(admin: dynamic)
+        {
+            firestore = admin.firestore()
+        }
     }
 }

@@ -1,7 +1,5 @@
 package com.mauriciotogneri.momowars.api
 
-import com.mauriciotogneri.momowars.database.DatabaseAccount
-import com.mauriciotogneri.momowars.database.DatabaseGame
 import com.mauriciotogneri.momowars.exception.ForbiddenException
 import com.mauriciotogneri.momowars.exception.InternalServerErrorException
 import com.mauriciotogneri.momowars.express.Request
@@ -13,18 +11,17 @@ class ApiGame : BaseApi()
 {
     fun getGame(request: Request, response: Response)
     {
-        process(response)
-        {
+        process(response) { database ->
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
             val gameId = request.pathParam("gameId")
 
             checkNotEmpty(sessionToken)
 
-            val documentAccount = DatabaseAccount.bySessionToken(sessionToken)
+            val documentAccount = database.account.bySessionToken(sessionToken)
 
             val gameRef = documentAccount.gameRef(gameId) ?: throw ForbiddenException()
 
-            val documentGame = DatabaseGame.byRef(gameRef)
+            val documentGame = database.game.byRef(gameRef)
 
             response.status(OK).json(documentGame.toJson())
         }
@@ -40,15 +37,15 @@ class ApiGame : BaseApi()
 
     fun getOpenGames(request: Request, response: Response)
     {
-        process(response)
-        {
+        process(response) { database ->
+
             val sessionToken = request.headerParam(Api.SESSION_TOKEN)
 
             checkNotEmpty(sessionToken)
 
-            DatabaseAccount.bySessionToken(sessionToken)
+            database.account.bySessionToken(sessionToken)
 
-            val games = DatabaseGame.getOpenGames()
+            val games = database.game.getOpenGames()
             val list = games.map { it.basicJson() }
 
             response.status(OK).json(list)

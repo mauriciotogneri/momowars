@@ -11,7 +11,7 @@ import com.mauriciotogneri.momowars.utils.Hash
 import com.mauriciotogneri.momowars.utils.await
 import kotlin.js.json
 
-object DatabaseAccount
+class DatabaseAccount(private val database: Database)
 {
     suspend fun createAccount(email: String, password: String, nickname: String): DocumentAccount
     {

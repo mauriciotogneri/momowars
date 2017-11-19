@@ -1,6 +1,5 @@
 package com.mauriciotogneri.momowars.api
 
-import com.mauriciotogneri.momowars.database.DatabaseAccount
 import com.mauriciotogneri.momowars.exception.UnauthorizedException
 import com.mauriciotogneri.momowars.express.Request
 import com.mauriciotogneri.momowars.express.Response
@@ -14,14 +13,14 @@ class ApiSession : BaseApi()
 {
     fun createSession(request: Request, response: Response)
     {
-        process(response)
-        {
+        process(response) { database ->
+
             val email = request.bodyParam("email")
             val password = request.bodyParam("password")
 
             checkNotEmpty(email, password)
 
-            val documentAccount = DatabaseAccount.byEmail(email)
+            val documentAccount = database.account.byEmail(email)
 
             if (!documentAccount.hasPassword(Hash.sha512(password)))
             {

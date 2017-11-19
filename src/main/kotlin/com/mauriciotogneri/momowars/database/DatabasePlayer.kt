@@ -5,7 +5,7 @@ import com.mauriciotogneri.momowars.document.DocumentPlayer
 import com.mauriciotogneri.momowars.firebase.DocumentReference
 import com.mauriciotogneri.momowars.utils.await
 
-object DatabasePlayer
+class DatabasePlayer(private val database: Database)
 {
     suspend fun byGameRef(gameRef: DocumentReference): List<DocumentPlayer>
     {
