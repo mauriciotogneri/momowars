@@ -16,16 +16,17 @@ open class BaseApi
             response: Response,
             function: suspend (database: Database) -> Unit)
     {
-        launch {
-            try
-            {
-                Database.firestore.runTransaction { transaction ->
+        Database.firestore.runTransaction { transaction ->
+
+            launch {
+                try
+                {
                     function.invoke(Database(transaction))
                 }
-            }
-            catch (exception: Throwable)
-            {
-                HttpException.process(exception, response)
+                catch (exception: Throwable)
+                {
+                    HttpException.process(exception, response)
+                }
             }
         }
     }

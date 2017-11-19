@@ -6,5 +6,5 @@ external class Firestore
 
     fun collection(collectionPath: String): CollectionReference
 
-    fun runTransaction(function: suspend (transaction: Transaction) -> Unit)
+    fun runTransaction(function: (transaction: Transaction) -> Unit)
 }
